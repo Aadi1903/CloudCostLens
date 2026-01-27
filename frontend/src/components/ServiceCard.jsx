@@ -41,6 +41,9 @@ const ServiceCard = ({ service, category, reason, cost }) => {
                         ${cost.toFixed(2)}
                     </div>
                     <div style={{ fontSize: '0.875rem', color: 'var(--text-muted)' }}>
+                        ≈ ₹{(cost * 84).toFixed(0)} (approx)
+                    </div>
+                    <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)', marginTop: '0.25rem' }}>
                         /month
                     </div>
                 </div>

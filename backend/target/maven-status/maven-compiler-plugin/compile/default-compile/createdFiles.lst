@@ -9,7 +9,9 @@ com\awsplanner\model\UserRequirement.class
 com\awsplanner\AwsPlannerApplication.class
 com\awsplanner\controller\RecommendationController.class
 com\awsplanner\model\AwsService.class
+com\awsplanner\model\Feedback.class
 com\awsplanner\config\CorsConfig.class
 com\awsplanner\service\CostEstimationService.class
+com\awsplanner\controller\FeedbackController.class
 com\awsplanner\model\Recommendation.class
 com\awsplanner\service\RequirementService.class

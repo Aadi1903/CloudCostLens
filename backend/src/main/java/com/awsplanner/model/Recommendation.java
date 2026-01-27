@@ -19,5 +19,6 @@ public class Recommendation {
     private double budget;
     private boolean withinBudget;
     private List<AlternativeArchitecture> alternatives;
+    private List<String> optionalUpgrades;
     private String message; // Additional information or warnings
 }

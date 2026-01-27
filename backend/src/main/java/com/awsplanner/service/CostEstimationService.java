@@ -76,8 +76,44 @@ public class CostEstimationService {
     /**
      * Validate if total cost is within budget
      */
+    /**
+     * Validate if total cost is within budget
+     * Budget is treated as a maximum cap
+     */
     public boolean validateBudget(double totalCost, double budget) {
         return totalCost <= budget;
+    }
+
+    /**
+     * Generate optional upgrade suggestions if under budget
+     */
+    public List<String> generateUpgrades(double currentCost, double budget, UserRequirement req) {
+        List<String> upgrades = new ArrayList<>();
+        
+        // If utilizing less than 70% of budget, suggest upgrades
+        if (currentCost < (budget * 0.7)) {
+            double remainingBudget = budget - currentCost;
+            
+            upgrades.add("Budget available: $" + String.format("%.2f", remainingBudget) + " remaining");
+            
+            if (req.getDatabaseNeeded()) {
+                upgrades.add("Database: Enable Multi-AZ deployment for high availability (+$" + 
+                           (req.getStorageGB() > 100 ? "50.00" : "25.00") + ")");
+            }
+            
+            if (req.getApplicationType().equals("backend-api") || req.getApplicationType().equals("full-stack")) {
+                upgrades.add("Security: Add AWS WAF for enhanced protection (+$30.00)");
+                upgrades.add("Performance: Enable Global Accelerator for lower latency (+$20.00)");
+            }
+            
+            if (req.getStorageGB() > 500) {
+                 upgrades.add("Storage: Enable Intelligent Tiering for cost optimization on access patterns");
+            }
+            
+            upgrades.add("Monitoring: Enable CloudWatch detailed monitoring (+$10.00)");
+        }
+        
+        return upgrades;
     }
     
     /**
@@ -91,7 +127,7 @@ public class CostEstimationService {
         for (AwsService service : services) {
             double cost = calculateServiceCost(service, req);
             String reason = generateReason(service, req);
-            
+             
             RecommendedService recService = new RecommendedService(
                 service.getName(),
                 service.getCategory(),

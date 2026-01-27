@@ -2,10 +2,13 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { getRecommendation } from '../api/recommendationApi';
 
+import HelpMeDecideModal from '../components/HelpMeDecideModal';
+
 const RequirementFormPage = () => {
     const navigate = useNavigate();
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState('');
+    const [showHelpModal, setShowHelpModal] = useState(false);
 
     const [formData, setFormData] = useState({
         applicationType: 'backend-api',
@@ -23,6 +26,11 @@ const RequirementFormPage = () => {
             [name]: type === 'checkbox' ? checked :
                 (name === 'storageGB' || name === 'monthlyBudget') ? Number(value) : value
         }));
+    };
+
+    const handleHelpDecide = (type) => {
+        setFormData(prev => ({ ...prev, applicationType: type }));
+        setShowHelpModal(false);
     };
 
     const handleSubmit = async (e) => {
@@ -57,7 +65,19 @@ const RequirementFormPage = () => {
                     <form onSubmit={handleSubmit}>
                         {/* Application Type */}
                         <div className="form-group">
-                            <label className="form-label">Application Type</label>
+                            <label className="form-label" style={{ display: 'flex', justifyContent: 'space-between' }}>
+                                Application Type
+                                <button
+                                    type="button"
+                                    onClick={() => setShowHelpModal(true)}
+                                    style={{
+                                        background: 'none', border: 'none', color: 'var(--primary)',
+                                        cursor: 'pointer', textDecoration: 'underline', fontSize: '0.9rem'
+                                    }}
+                                >
+                                    Not sure? Help me decide
+                                </button>
+                            </label>
                             <select
                                 name="applicationType"
                                 value={formData.applicationType}
@@ -202,18 +222,21 @@ const RequirementFormPage = () => {
                         {/* Monthly Budget */}
                         <div className="form-group">
                             <label className="form-label">
-                                Monthly Budget: ${formData.monthlyBudget}
+                                Monthly Budget (Max): ${formData.monthlyBudget}
                             </label>
                             <input
                                 type="number"
                                 name="monthlyBudget"
                                 min="1"
-                                step="10"
+                                step="1"
                                 value={formData.monthlyBudget}
                                 onChange={handleChange}
                                 className="form-input"
                                 required
                             />
+                            <div style={{ fontSize: '0.875rem', color: 'var(--text-muted)', marginTop: '0.25rem' }}>
+                                Enter your maximum limit suitable for your needs.
+                            </div>
                         </div>
 
                         {/* Error Message */}
@@ -242,6 +265,13 @@ const RequirementFormPage = () => {
                     </form>
                 </div>
             </div>
+
+            {showHelpModal && (
+                <HelpMeDecideModal
+                    onClose={() => setShowHelpModal(false)}
+                    onComplete={handleHelpDecide}
+                />
+            )}
         </div>
     );
 };

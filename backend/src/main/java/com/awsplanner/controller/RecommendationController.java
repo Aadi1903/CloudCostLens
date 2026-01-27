@@ -57,14 +57,19 @@ public class RecommendationController {
             // Step 4: Generate alternatives
             List<AlternativeArchitecture> alternatives = 
                 costEstimation.suggestAlternatives(selectedServices, requirement);
+             
+            // Step 5: Generate optional upgrades
+            List<String> optionalUpgrades = 
+                costEstimation.generateUpgrades(totalCost, requirement.getMonthlyBudget(), requirement);
             
-            // Step 5: Build response
+            // Step 6: Build response
             Recommendation recommendation = new Recommendation();
             recommendation.setArchitecture(recommendedServices);
             recommendation.setTotalCost(totalCost);
             recommendation.setBudget(requirement.getMonthlyBudget());
             recommendation.setWithinBudget(withinBudget);
             recommendation.setAlternatives(alternatives);
+            recommendation.setOptionalUpgrades(optionalUpgrades);
             
             if (!withinBudget) {
                 recommendation.setMessage(

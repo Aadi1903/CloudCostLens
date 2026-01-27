@@ -33,7 +33,16 @@ const CostBreakdown = ({ services, totalCost, budget, withinBudget }) => {
                     fontWeight: '700'
                 }}>
                     <span>Total Monthly Cost</span>
-                    <span style={{ color: 'var(--primary)' }}>${totalCost.toFixed(2)}</span>
+                    <div style={{ textAlign: 'right' }}>
+                        <div style={{ color: 'var(--primary)' }}>${totalCost.toFixed(2)}</div>
+                        <div style={{ fontSize: '0.875rem', color: 'var(--text-muted)', fontWeight: '400' }}>
+                            ≈ ₹{(totalCost * 84).toFixed(0)} (approx)
+                        </div>
+                    </div>
+                </div>
+
+                <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)', fontStyle: 'italic', marginTop: '0.5rem' }}>
+                    INR values are approximate and may vary based on exchange rate.
                 </div>
 
                 <div style={{

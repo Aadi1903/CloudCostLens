@@ -12,7 +12,7 @@ const AboutPage = () => {
                 <div className="card mb-3">
                     <h2 className="card-title">Project Goal</h2>
                     <p className="card-content">
-                        This AWS Service Recommendation & Cost Planning System is an educational tool designed to help
+                        CloudCostLens is an educational tool designed to help
                         developers and architects make informed decisions about AWS service selection. Our mission is to
                         simplify the complex process of choosing the right AWS services for your application while staying
                         within budget.
@@ -170,6 +170,20 @@ const AboutPage = () => {
                                 <li>Modern CSS</li>
                             </ul>
                         </div>
+                    </div>
+                </div>
+                <div className="card mt-4">
+                    <h3>Planned Enhancements (Roadmap)</h3>
+                    <p>We are constantly working to improve CloudCostLens. Here is what's coming next:</p>
+                    <ul style={{ paddingLeft: '1.5rem', marginTop: '1rem' }}>
+                        <li><strong>Multi-Cloud Support:</strong> Support for Azure and Google Cloud Platform (GCP).</li>
+                        <li><strong>Advanced Requirement Parsing:</strong> Use NLP to understand free-text requirements.</li>
+                        <li><strong>Region-Specific Pricing:</strong> Dynamic pricing based on selected AWS regions.</li>
+                        <li><strong>User Accounts:</strong> Save and manage multiple project estimations.</li>
+                        <li><strong>Export to Terraform:</strong> Generate infrastructure-as-code templates from recommendations.</li>
+                    </ul>
+                    <div style={{ marginTop: '1rem', fontStyle: 'italic', color: 'var(--text-secondary)' }}>
+                        Have a feature request? Use the "Give Feedback" button on the recommendation page!
                     </div>
                 </div>
             </div>
