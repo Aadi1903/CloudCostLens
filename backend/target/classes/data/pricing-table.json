@@ -1,0 +1,76 @@
+{
+  "ec2": {
+    "baseCost": 10,
+    "perTrafficUnit": 5,
+    "perStorageGB": 0.1
+  },
+  "lambda": {
+    "baseCost": 0,
+    "perMillionRequests": 0.2,
+    "perGBSecond": 0.0000166667
+  },
+  "ecs": {
+    "baseCost": 15,
+    "perTrafficUnit": 3,
+    "perStorageGB": 0.1
+  },
+  "elastic-beanstalk": {
+    "baseCost": 12,
+    "perTrafficUnit": 4,
+    "perStorageGB": 0.1
+  },
+  "s3": {
+    "baseCost": 0,
+    "perGB": 0.023,
+    "perMillionRequests": 0.005
+  },
+  "ebs": {
+    "baseCost": 0,
+    "perGB": 0.1
+  },
+  "efs": {
+    "baseCost": 0,
+    "perGB": 0.3
+  },
+  "rds": {
+    "baseCost": 25,
+    "perStorageGB": 0.115
+  },
+  "dynamodb": {
+    "baseCost": 0,
+    "perMillionRequests": 0.25,
+    "perGBStorage": 0.25
+  },
+  "aurora": {
+    "baseCost": 50,
+    "perStorageGB": 0.1
+  },
+  "cloudfront": {
+    "baseCost": 0,
+    "perGB": 0.085
+  },
+  "route53": {
+    "baseCost": 0.5,
+    "perMillionQueries": 0.4
+  },
+  "api-gateway": {
+    "baseCost": 0,
+    "perMillionRequests": 3.5
+  },
+  "sqs": {
+    "baseCost": 0,
+    "perMillionRequests": 0.4
+  },
+  "sns": {
+    "baseCost": 0,
+    "perMillionRequests": 0.5
+  },
+  "cloudwatch": {
+    "baseCost": 3,
+    "perMetric": 0.3
+  },
+  "iam": {
+    "baseCost": 0,
+    "perUser": 0
+  }
+}

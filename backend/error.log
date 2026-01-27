@@ -1,0 +1,389 @@
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] --------------< com.awsplanner:aws-recommendation-system >--------------
+[INFO] Building AWS Service Recommendation System 1.0.0
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ aws-recommendation-system ---
+[INFO] Copying 1 resource from src\main\resources to target\classes
+[INFO] Copying 2 resources from src\main\resources to target\classes
+[INFO] 
+[INFO] --- compiler:3.11.0:compile (default-compile) @ aws-recommendation-system ---
+[INFO] Changes detected - recompiling the module! :source
+[INFO] Compiling 13 source files with javac [debug release 17] to target\classes
+[INFO] -------------------------------------------------------------
+[ERROR] COMPILATION ERROR : 
+[INFO] -------------------------------------------------------------
+[ERROR] /C:/Users/DELL/Desktop/awsP/backend/src/main/java/com/awsplanner/service/RequirementService.java:[19,40] cannot find symbol
+  symbol:   method getApplicationType()
+  location: variable req of type com.awsplanner.model.UserRequirement
+[ERROR] /C:/Users/DELL/Desktop/awsP/backend/src/main/java/com/awsplanner/service/RequirementService.java:[26,30] cannot find symbol
+  symbol:   method getTraffic()
+  location: variable req of type com.awsplanner.model.UserRequirement
+[ERROR] /C:/Users/DELL/Desktop/awsP/backend/src/main/java/com/awsplanner/service/RequirementService.java:[33,30] cannot find symbol
+  symbol:   method getOperationalEffort()
+  location: variable req of type com.awsplanner.model.UserRequirement
+[ERROR] /C:/Users/DELL/Desktop/awsP/backend/src/main/java/com/awsplanner/controller/RecommendationController.java:[55,88] cannot find symbol
+  symbol:   method getMonthlyBudget()
+  location: variable requirement of type com.awsplanner.model.UserRequirement
+[ERROR] /C:/Users/DELL/Desktop/awsP/backend/src/main/java/com/awsplanner/controller/RecommendationController.java:[63,27] cannot find symbol
+  symbol:   method setArchitecture(java.util.List<com.awsplanner.model.RecommendedService>)
+  location: variable recommendation of type com.awsplanner.model.Recommendation
+[ERROR] /C:/Users/DELL/Desktop/awsP/backend/src/main/java/com/awsplanner/controller/RecommendationController.java:[64,27] cannot find symbol
+  symbol:   method setTotalCost(double)
+  location: variable recommendation of type com.awsplanner.model.Recommendation
+[ERROR] /C:/Users/DELL/Desktop/awsP/backend/src/main/java/com/awsplanner/controller/RecommendationController.java:[65,49] cannot find symbol
+  symbol:   method getMonthlyBudget()
+  location: variable requirement of type com.awsplanner.model.UserRequirement
+[ERROR] /C:/Users/DELL/Desktop/awsP/backend/src/main/java/com/awsplanner/controller/RecommendationController.java:[66,27] cannot find symbol
+  symbol:   method setWithinBudget(boolean)
+  location: variable recommendation of type com.awsplanner.model.Recommendation
+[ERROR] /C:/Users/DELL/Desktop/awsP/backend/src/main/java/com/awsplanner/controller/RecommendationController.java:[67,27] cannot find symbol
+  symbol:   method setAlternatives(java.util.List<com.awsplanner.model.AlternativeArchitecture>)
+  location: variable recommendation of type com.awsplanner.model.Recommendation
+[ERROR] /C:/Users/DELL/Desktop/awsP/backend/src/main/java/com/awsplanner/controller/RecommendationController.java:[72,56] cannot find symbol
+  symbol:   method getMonthlyBudget()
+  location: variable requirement of type com.awsplanner.model.UserRequirement
+[ERROR] /C:/Users/DELL/Desktop/awsP/backend/src/main/java/com/awsplanner/controller/RecommendationController.java:[76,31] cannot find symbol
+  symbol:   method setMessage(java.lang.String)
+  location: variable recommendation of type com.awsplanner.model.Recommendation
+[ERROR] /C:/Users/DELL/Desktop/awsP/backend/src/main/java/com/awsplanner/service/DecisionEngineService.java:[52,40] cannot find symbol
+  symbol:   method isMandatory()
+  location: variable service of type com.awsplanner.model.AwsService
+[ERROR] /C:/Users/DELL/Desktop/awsP/backend/src/main/java/com/awsplanner/service/DecisionEngineService.java:[53,59] cannot find symbol
+  symbol:   method getApplicationType()
+  location: variable req of type com.awsplanner.model.UserRequirement
+[ERROR] /C:/Users/DELL/Desktop/awsP/backend/src/main/java/com/awsplanner/service/DecisionEngineService.java:[54,69] cannot find symbol
+  symbol:   method getOperationalEffort()
+  location: variable req of type com.awsplanner.model.UserRequirement
+[ERROR] /C:/Users/DELL/Desktop/awsP/backend/src/main/java/com/awsplanner/service/DecisionEngineService.java:[81,34] constructor ServiceScore in class com.awsplanner.model.ServiceScore cannot be applied to given types;
+  required: no arguments
+  found:    com.awsplanner.model.AwsService,double,java.lang.String,double,double,double,double
+  reason: actual and formal argument lists differ in length
+[ERROR] /C:/Users/DELL/Desktop/awsP/backend/src/main/java/com/awsplanner/service/DecisionEngineService.java:[98,47] cannot find symbol
+  symbol:   method getScore()
+  location: variable b of type com.awsplanner.model.ServiceScore
+[ERROR] /C:/Users/DELL/Desktop/awsP/backend/src/main/java/com/awsplanner/service/DecisionEngineService.java:[98,61] cannot find symbol
+  symbol:   method getScore()
+  location: variable a of type com.awsplanner.model.ServiceScore
+[ERROR] /C:/Users/DELL/Desktop/awsP/backend/src/main/java/com/awsplanner/service/DecisionEngineService.java:[104,36] cannot find symbol
+  symbol:   method getService()
+  location: variable score of type com.awsplanner.model.ServiceScore
+[ERROR] /C:/Users/DELL/Desktop/awsP/backend/src/main/java/com/awsplanner/service/DecisionEngineService.java:[108,55] cannot find symbol
+  symbol:   method getService()
+  location: variable score of type com.awsplanner.model.ServiceScore
+[ERROR] /C:/Users/DELL/Desktop/awsP/backend/src/main/java/com/awsplanner/service/DecisionEngineService.java:[118,23] cannot find symbol
+  symbol:   method getUseCases()
+  location: variable service of type com.awsplanner.model.AwsService
+[ERROR] /C:/Users/DELL/Desktop/awsP/backend/src/main/java/com/awsplanner/service/DecisionEngineService.java:[124,28] cannot find symbol
+  symbol:   method getOperationalEffort()
+  location: variable service of type com.awsplanner.model.AwsService
+[ERROR] /C:/Users/DELL/Desktop/awsP/backend/src/main/java/com/awsplanner/service/DecisionEngineService.java:[131,24] cannot find symbol
+  symbol:   method getOperationalEffort()
+  location: variable service of type com.awsplanner.model.AwsService
+[ERROR] /C:/Users/DELL/Desktop/awsP/backend/src/main/java/com/awsplanner/service/DecisionEngineService.java:[136,17] cannot find symbol
+  symbol:   method getDatabaseNeeded()
+  location: variable req of type com.awsplanner.model.UserRequirement
+[ERROR] /C:/Users/DELL/Desktop/awsP/backend/src/main/java/com/awsplanner/service/DecisionEngineService.java:[136,48] cannot find symbol
+  symbol:   method getCategory()
+  location: variable service of type com.awsplanner.model.AwsService
+[ERROR] /C:/Users/DELL/Desktop/awsP/backend/src/main/java/com/awsplanner/service/DecisionEngineService.java:[143,35] cannot find symbol
+  symbol:   method getCostLevel()
+  location: variable service of type com.awsplanner.model.AwsService
+[ERROR] /C:/Users/DELL/Desktop/awsP/backend/src/main/java/com/awsplanner/service/DecisionEngineService.java:[144,28] cannot find symbol
+  symbol:   method getMonthlyBudget()
+  location: variable req of type com.awsplanner.model.UserRequirement
+[ERROR] /C:/Users/DELL/Desktop/awsP/backend/src/main/java/com/awsplanner/service/DecisionEngineService.java:[175,37] cannot find symbol
+  symbol:   method getScalability()
+  location: variable service of type com.awsplanner.model.AwsService
+[ERROR] /C:/Users/DELL/Desktop/awsP/backend/src/main/java/com/awsplanner/service/DecisionEngineService.java:[176,29] cannot find symbol
+  symbol:   method getTraffic()
+  location: variable req of type com.awsplanner.model.UserRequirement
+[ERROR] /C:/Users/DELL/Desktop/awsP/backend/src/main/java/com/awsplanner/service/DecisionEngineService.java:[204,39] cannot find symbol
+  symbol:   method getOperationalEffort()
+  location: variable service of type com.awsplanner.model.AwsService
+[ERROR] /C:/Users/DELL/Desktop/awsP/backend/src/main/java/com/awsplanner/service/DecisionEngineService.java:[205,36] cannot find symbol
+  symbol:   method getOperationalEffort()
+  location: variable req of type com.awsplanner.model.UserRequirement
+[ERROR] /C:/Users/DELL/Desktop/awsP/backend/src/main/java/com/awsplanner/service/DecisionEngineService.java:[239,40] cannot find symbol
+  symbol:   method getUseCases()
+  location: variable service of type com.awsplanner.model.AwsService
+[ERROR] /C:/Users/DELL/Desktop/awsP/backend/src/main/java/com/awsplanner/service/DecisionEngineService.java:[241,34] cannot find symbol
+  symbol:   method getApplicationType()
+  location: variable req of type com.awsplanner.model.UserRequirement
+[ERROR] /C:/Users/DELL/Desktop/awsP/backend/src/main/java/com/awsplanner/service/CostEstimationService.java:[40,81] cannot find symbol
+  symbol:   method getId()
+  location: variable service of type com.awsplanner.model.AwsService
+[ERROR] /C:/Users/DELL/Desktop/awsP/backend/src/main/java/com/awsplanner/service/CostEstimationService.java:[49,70] cannot find symbol
+  symbol:   method getTraffic()
+  location: variable req of type com.awsplanner.model.UserRequirement
+[ERROR] /C:/Users/DELL/Desktop/awsP/backend/src/main/java/com/awsplanner/service/CostEstimationService.java:[66,32] cannot find symbol
+  symbol:   method getStorageGB()
+  location: variable req of type com.awsplanner.model.UserRequirement
+[ERROR] /C:/Users/DELL/Desktop/awsP/backend/src/main/java/com/awsplanner/service/CostEstimationService.java:[70,54] cannot find symbol
+  symbol:   method getStorageGB()
+  location: variable req of type com.awsplanner.model.UserRequirement
+[ERROR] /C:/Users/DELL/Desktop/awsP/backend/src/main/java/com/awsplanner/service/CostEstimationService.java:[97,24] cannot find symbol
+  symbol:   method getCategory()
+  location: variable service of type com.awsplanner.model.AwsService
+[ERROR] /C:/Users/DELL/Desktop/awsP/backend/src/main/java/com/awsplanner/service/CostEstimationService.java:[96,24] cannot find symbol
+  symbol:   method getName()
+  location: variable service of type com.awsplanner.model.AwsService
+[ERROR] /C:/Users/DELL/Desktop/awsP/backend/src/main/java/com/awsplanner/service/CostEstimationService.java:[123,16] cannot find symbol
+  symbol:   method getMonthlyBudget()
+  location: variable req of type com.awsplanner.model.UserRequirement
+[ERROR] /C:/Users/DELL/Desktop/awsP/backend/src/main/java/com/awsplanner/service/CostEstimationService.java:[140,20] cannot find symbol
+  symbol:   method getOperationalEffort()
+  location: variable service of type com.awsplanner.model.AwsService
+[ERROR] /C:/Users/DELL/Desktop/awsP/backend/src/main/java/com/awsplanner/service/CostEstimationService.java:[141,16] cannot find symbol
+  symbol:   method getOperationalEffort()
+  location: variable req of type com.awsplanner.model.UserRequirement
+[ERROR] /C:/Users/DELL/Desktop/awsP/backend/src/main/java/com/awsplanner/service/CostEstimationService.java:[145,20] cannot find symbol
+  symbol:   method getCostLevel()
+  location: variable service of type com.awsplanner.model.AwsService
+[ERROR] /C:/Users/DELL/Desktop/awsP/backend/src/main/java/com/awsplanner/service/CostEstimationService.java:[149,20] cannot find symbol
+  symbol:   method getScalability()
+  location: variable service of type com.awsplanner.model.AwsService
+[ERROR] /C:/Users/DELL/Desktop/awsP/backend/src/main/java/com/awsplanner/service/CostEstimationService.java:[150,16] cannot find symbol
+  symbol:   method getTraffic()
+  location: variable req of type com.awsplanner.model.UserRequirement
+[ERROR] /C:/Users/DELL/Desktop/awsP/backend/src/main/java/com/awsplanner/service/CostEstimationService.java:[154,20] cannot find symbol
+  symbol:   method getUseCases()
+  location: variable service of type com.awsplanner.model.AwsService
+[ERROR] /C:/Users/DELL/Desktop/awsP/backend/src/main/java/com/awsplanner/service/CostEstimationService.java:[154,47] cannot find symbol
+  symbol:   method getApplicationType()
+  location: variable req of type com.awsplanner.model.UserRequirement
+[ERROR] /C:/Users/DELL/Desktop/awsP/backend/src/main/java/com/awsplanner/service/CostEstimationService.java:[155,47] cannot find symbol
+  symbol:   method getApplicationType()
+  location: variable req of type com.awsplanner.model.UserRequirement
+[ERROR] /C:/Users/DELL/Desktop/awsP/backend/src/main/java/com/awsplanner/service/CostEstimationService.java:[159,27] cannot find symbol
+  symbol:   method getDescription()
+  location: variable service of type com.awsplanner.model.AwsService
+[ERROR] /C:/Users/DELL/Desktop/awsP/backend/src/main/java/com/awsplanner/service/CostEstimationService.java:[169,20] cannot find symbol
+  symbol:   method getApplicationType()
+  location: variable req of type com.awsplanner.model.UserRequirement
+[ERROR] /C:/Users/DELL/Desktop/awsP/backend/src/main/java/com/awsplanner/service/CostEstimationService.java:[180,24] cannot find symbol
+  symbol:   method getDatabaseNeeded()
+  location: variable req of type com.awsplanner.model.UserRequirement
+[ERROR] /C:/Users/DELL/Desktop/awsP/backend/src/main/java/com/awsplanner/service/CostEstimationService.java:[194,24] cannot find symbol
+  symbol:   method getDatabaseNeeded()
+  location: variable req of type com.awsplanner.model.UserRequirement
+[ERROR] /C:/Users/DELL/Desktop/awsP/backend/src/main/java/com/awsplanner/service/CostEstimationService.java:[199,32] cannot find symbol
+  symbol:   method getDatabaseNeeded()
+  location: variable req of type com.awsplanner.model.UserRequirement
+[ERROR] /C:/Users/DELL/Desktop/awsP/backend/src/main/java/com/awsplanner/service/CostEstimationService.java:[221,16] constructor AlternativeArchitecture in class com.awsplanner.model.AlternativeArchitecture cannot be applied to given types;
+  required: no arguments
+  found:    java.lang.String,java.util.List<java.lang.String>,double,java.lang.String
+  reason: actual and formal argument lists differ in length
+[ERROR] /C:/Users/DELL/Desktop/awsP/backend/src/main/java/com/awsplanner/service/CostEstimationService.java:[233,20] cannot find symbol
+  symbol:   method getApplicationType()
+  location: variable req of type com.awsplanner.model.UserRequirement
+[ERROR] /C:/Users/DELL/Desktop/awsP/backend/src/main/java/com/awsplanner/service/CostEstimationService.java:[257,16] constructor AlternativeArchitecture in class com.awsplanner.model.AlternativeArchitecture cannot be applied to given types;
+  required: no arguments
+  found:    java.lang.String,java.util.List<java.lang.String>,double,java.lang.String
+  reason: actual and formal argument lists differ in length
+[ERROR] /C:/Users/DELL/Desktop/awsP/backend/src/main/java/com/awsplanner/repository/ServiceKnowledgeBase.java:[55,27] cannot find symbol
+  symbol:   method getId()
+  location: variable s of type com.awsplanner.model.AwsService
+[ERROR] /C:/Users/DELL/Desktop/awsP/backend/src/main/java/com/awsplanner/repository/ServiceKnowledgeBase.java:[62,27] cannot find symbol
+  symbol:   method getCategory()
+  location: variable s of type com.awsplanner.model.AwsService
+[ERROR] /C:/Users/DELL/Desktop/awsP/backend/src/main/java/com/awsplanner/repository/ServiceKnowledgeBase.java:[68,21] invalid method reference
+  cannot find symbol
+    symbol:   method isMandatory(T)
+    location: class com.awsplanner.model.AwsService
+[INFO] 58 errors 
+[INFO] -------------------------------------------------------------
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD FAILURE
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  3.755 s
+[INFO] Finished at: 2026-01-27T01:28:01+05:30
+[INFO] ------------------------------------------------------------------------
+[ERROR] Failed to execute goal org.apache.maven.plugins:maven-compiler-plugin:3.11.0:compile (default-compile) on project aws-recommendation-system: Compilation failure: Compilation failure: 
+[ERROR] /C:/Users/DELL/Desktop/awsP/backend/src/main/java/com/awsplanner/service/RequirementService.java:[19,40] cannot find symbol
+[ERROR]   symbol:   method getApplicationType()
+[ERROR]   location: variable req of type com.awsplanner.model.UserRequirement
+[ERROR] /C:/Users/DELL/Desktop/awsP/backend/src/main/java/com/awsplanner/service/RequirementService.java:[26,30] cannot find symbol
+[ERROR]   symbol:   method getTraffic()
+[ERROR]   location: variable req of type com.awsplanner.model.UserRequirement
+[ERROR] /C:/Users/DELL/Desktop/awsP/backend/src/main/java/com/awsplanner/service/RequirementService.java:[33,30] cannot find symbol
+[ERROR]   symbol:   method getOperationalEffort()
+[ERROR]   location: variable req of type com.awsplanner.model.UserRequirement
+[ERROR] /C:/Users/DELL/Desktop/awsP/backend/src/main/java/com/awsplanner/controller/RecommendationController.java:[55,88] cannot find symbol
+[ERROR]   symbol:   method getMonthlyBudget()
+[ERROR]   location: variable requirement of type com.awsplanner.model.UserRequirement
+[ERROR] /C:/Users/DELL/Desktop/awsP/backend/src/main/java/com/awsplanner/controller/RecommendationController.java:[63,27] cannot find symbol
+[ERROR]   symbol:   method setArchitecture(java.util.List<com.awsplanner.model.RecommendedService>)
+[ERROR]   location: variable recommendation of type com.awsplanner.model.Recommendation
+[ERROR] /C:/Users/DELL/Desktop/awsP/backend/src/main/java/com/awsplanner/controller/RecommendationController.java:[64,27] cannot find symbol
+[ERROR]   symbol:   method setTotalCost(double)
+[ERROR]   location: variable recommendation of type com.awsplanner.model.Recommendation
+[ERROR] /C:/Users/DELL/Desktop/awsP/backend/src/main/java/com/awsplanner/controller/RecommendationController.java:[65,49] cannot find symbol
+[ERROR]   symbol:   method getMonthlyBudget()
+[ERROR]   location: variable requirement of type com.awsplanner.model.UserRequirement
+[ERROR] /C:/Users/DELL/Desktop/awsP/backend/src/main/java/com/awsplanner/controller/RecommendationController.java:[66,27] cannot find symbol
+[ERROR]   symbol:   method setWithinBudget(boolean)
+[ERROR]   location: variable recommendation of type com.awsplanner.model.Recommendation
+[ERROR] /C:/Users/DELL/Desktop/awsP/backend/src/main/java/com/awsplanner/controller/RecommendationController.java:[67,27] cannot find symbol
+[ERROR]   symbol:   method setAlternatives(java.util.List<com.awsplanner.model.AlternativeArchitecture>)
+[ERROR]   location: variable recommendation of type com.awsplanner.model.Recommendation
+[ERROR] /C:/Users/DELL/Desktop/awsP/backend/src/main/java/com/awsplanner/controller/RecommendationController.java:[72,56] cannot find symbol
+[ERROR]   symbol:   method getMonthlyBudget()
+[ERROR]   location: variable requirement of type com.awsplanner.model.UserRequirement
+[ERROR] /C:/Users/DELL/Desktop/awsP/backend/src/main/java/com/awsplanner/controller/RecommendationController.java:[76,31] cannot find symbol
+[ERROR]   symbol:   method setMessage(java.lang.String)
+[ERROR]   location: variable recommendation of type com.awsplanner.model.Recommendation
+[ERROR] /C:/Users/DELL/Desktop/awsP/backend/src/main/java/com/awsplanner/service/DecisionEngineService.java:[52,40] cannot find symbol
+[ERROR]   symbol:   method isMandatory()
+[ERROR]   location: variable service of type com.awsplanner.model.AwsService
+[ERROR] /C:/Users/DELL/Desktop/awsP/backend/src/main/java/com/awsplanner/service/DecisionEngineService.java:[53,59] cannot find symbol
+[ERROR]   symbol:   method getApplicationType()
+[ERROR]   location: variable req of type com.awsplanner.model.UserRequirement
+[ERROR] /C:/Users/DELL/Desktop/awsP/backend/src/main/java/com/awsplanner/service/DecisionEngineService.java:[54,69] cannot find symbol
+[ERROR]   symbol:   method getOperationalEffort()
+[ERROR]   location: variable req of type com.awsplanner.model.UserRequirement
+[ERROR] /C:/Users/DELL/Desktop/awsP/backend/src/main/java/com/awsplanner/service/DecisionEngineService.java:[81,34] constructor ServiceScore in class com.awsplanner.model.ServiceScore cannot be applied to given types;
+[ERROR]   required: no arguments
+[ERROR]   found:    com.awsplanner.model.AwsService,double,java.lang.String,double,double,double,double
+[ERROR]   reason: actual and formal argument lists differ in length
+[ERROR] /C:/Users/DELL/Desktop/awsP/backend/src/main/java/com/awsplanner/service/DecisionEngineService.java:[98,47] cannot find symbol
+[ERROR]   symbol:   method getScore()
+[ERROR]   location: variable b of type com.awsplanner.model.ServiceScore
+[ERROR] /C:/Users/DELL/Desktop/awsP/backend/src/main/java/com/awsplanner/service/DecisionEngineService.java:[98,61] cannot find symbol
+[ERROR]   symbol:   method getScore()
+[ERROR]   location: variable a of type com.awsplanner.model.ServiceScore
+[ERROR] /C:/Users/DELL/Desktop/awsP/backend/src/main/java/com/awsplanner/service/DecisionEngineService.java:[104,36] cannot find symbol
+[ERROR]   symbol:   method getService()
+[ERROR]   location: variable score of type com.awsplanner.model.ServiceScore
+[ERROR] /C:/Users/DELL/Desktop/awsP/backend/src/main/java/com/awsplanner/service/DecisionEngineService.java:[108,55] cannot find symbol
+[ERROR]   symbol:   method getService()
+[ERROR]   location: variable score of type com.awsplanner.model.ServiceScore
+[ERROR] /C:/Users/DELL/Desktop/awsP/backend/src/main/java/com/awsplanner/service/DecisionEngineService.java:[118,23] cannot find symbol
+[ERROR]   symbol:   method getUseCases()
+[ERROR]   location: variable service of type com.awsplanner.model.AwsService
+[ERROR] /C:/Users/DELL/Desktop/awsP/backend/src/main/java/com/awsplanner/service/DecisionEngineService.java:[124,28] cannot find symbol
+[ERROR]   symbol:   method getOperationalEffort()
+[ERROR]   location: variable service of type com.awsplanner.model.AwsService
+[ERROR] /C:/Users/DELL/Desktop/awsP/backend/src/main/java/com/awsplanner/service/DecisionEngineService.java:[131,24] cannot find symbol
+[ERROR]   symbol:   method getOperationalEffort()
+[ERROR]   location: variable service of type com.awsplanner.model.AwsService
+[ERROR] /C:/Users/DELL/Desktop/awsP/backend/src/main/java/com/awsplanner/service/DecisionEngineService.java:[136,17] cannot find symbol
+[ERROR]   symbol:   method getDatabaseNeeded()
+[ERROR]   location: variable req of type com.awsplanner.model.UserRequirement
+[ERROR] /C:/Users/DELL/Desktop/awsP/backend/src/main/java/com/awsplanner/service/DecisionEngineService.java:[136,48] cannot find symbol
+[ERROR]   symbol:   method getCategory()
+[ERROR]   location: variable service of type com.awsplanner.model.AwsService
+[ERROR] /C:/Users/DELL/Desktop/awsP/backend/src/main/java/com/awsplanner/service/DecisionEngineService.java:[143,35] cannot find symbol
+[ERROR]   symbol:   method getCostLevel()
+[ERROR]   location: variable service of type com.awsplanner.model.AwsService
+[ERROR] /C:/Users/DELL/Desktop/awsP/backend/src/main/java/com/awsplanner/service/DecisionEngineService.java:[144,28] cannot find symbol
+[ERROR]   symbol:   method getMonthlyBudget()
+[ERROR]   location: variable req of type com.awsplanner.model.UserRequirement
+[ERROR] /C:/Users/DELL/Desktop/awsP/backend/src/main/java/com/awsplanner/service/DecisionEngineService.java:[175,37] cannot find symbol
+[ERROR]   symbol:   method getScalability()
+[ERROR]   location: variable service of type com.awsplanner.model.AwsService
+[ERROR] /C:/Users/DELL/Desktop/awsP/backend/src/main/java/com/awsplanner/service/DecisionEngineService.java:[176,29] cannot find symbol
+[ERROR]   symbol:   method getTraffic()
+[ERROR]   location: variable req of type com.awsplanner.model.UserRequirement
+[ERROR] /C:/Users/DELL/Desktop/awsP/backend/src/main/java/com/awsplanner/service/DecisionEngineService.java:[204,39] cannot find symbol
+[ERROR]   symbol:   method getOperationalEffort()
+[ERROR]   location: variable service of type com.awsplanner.model.AwsService
+[ERROR] /C:/Users/DELL/Desktop/awsP/backend/src/main/java/com/awsplanner/service/DecisionEngineService.java:[205,36] cannot find symbol
+[ERROR]   symbol:   method getOperationalEffort()
+[ERROR]   location: variable req of type com.awsplanner.model.UserRequirement
+[ERROR] /C:/Users/DELL/Desktop/awsP/backend/src/main/java/com/awsplanner/service/DecisionEngineService.java:[239,40] cannot find symbol
+[ERROR]   symbol:   method getUseCases()
+[ERROR]   location: variable service of type com.awsplanner.model.AwsService
+[ERROR] /C:/Users/DELL/Desktop/awsP/backend/src/main/java/com/awsplanner/service/DecisionEngineService.java:[241,34] cannot find symbol
+[ERROR]   symbol:   method getApplicationType()
+[ERROR]   location: variable req of type com.awsplanner.model.UserRequirement
+[ERROR] /C:/Users/DELL/Desktop/awsP/backend/src/main/java/com/awsplanner/service/CostEstimationService.java:[40,81] cannot find symbol
+[ERROR]   symbol:   method getId()
+[ERROR]   location: variable service of type com.awsplanner.model.AwsService
+[ERROR] /C:/Users/DELL/Desktop/awsP/backend/src/main/java/com/awsplanner/service/CostEstimationService.java:[49,70] cannot find symbol
+[ERROR]   symbol:   method getTraffic()
+[ERROR]   location: variable req of type com.awsplanner.model.UserRequirement
+[ERROR] /C:/Users/DELL/Desktop/awsP/backend/src/main/java/com/awsplanner/service/CostEstimationService.java:[66,32] cannot find symbol
+[ERROR]   symbol:   method getStorageGB()
+[ERROR]   location: variable req of type com.awsplanner.model.UserRequirement
+[ERROR] /C:/Users/DELL/Desktop/awsP/backend/src/main/java/com/awsplanner/service/CostEstimationService.java:[70,54] cannot find symbol
+[ERROR]   symbol:   method getStorageGB()
+[ERROR]   location: variable req of type com.awsplanner.model.UserRequirement
+[ERROR] /C:/Users/DELL/Desktop/awsP/backend/src/main/java/com/awsplanner/service/CostEstimationService.java:[97,24] cannot find symbol
+[ERROR]   symbol:   method getCategory()
+[ERROR]   location: variable service of type com.awsplanner.model.AwsService
+[ERROR] /C:/Users/DELL/Desktop/awsP/backend/src/main/java/com/awsplanner/service/CostEstimationService.java:[96,24] cannot find symbol
+[ERROR]   symbol:   method getName()
+[ERROR]   location: variable service of type com.awsplanner.model.AwsService
+[ERROR] /C:/Users/DELL/Desktop/awsP/backend/src/main/java/com/awsplanner/service/CostEstimationService.java:[123,16] cannot find symbol
+[ERROR]   symbol:   method getMonthlyBudget()
+[ERROR]   location: variable req of type com.awsplanner.model.UserRequirement
+[ERROR] /C:/Users/DELL/Desktop/awsP/backend/src/main/java/com/awsplanner/service/CostEstimationService.java:[140,20] cannot find symbol
+[ERROR]   symbol:   method getOperationalEffort()
+[ERROR]   location: variable service of type com.awsplanner.model.AwsService
+[ERROR] /C:/Users/DELL/Desktop/awsP/backend/src/main/java/com/awsplanner/service/CostEstimationService.java:[141,16] cannot find symbol
+[ERROR]   symbol:   method getOperationalEffort()
+[ERROR]   location: variable req of type com.awsplanner.model.UserRequirement
+[ERROR] /C:/Users/DELL/Desktop/awsP/backend/src/main/java/com/awsplanner/service/CostEstimationService.java:[145,20] cannot find symbol
+[ERROR]   symbol:   method getCostLevel()
+[ERROR]   location: variable service of type com.awsplanner.model.AwsService
+[ERROR] /C:/Users/DELL/Desktop/awsP/backend/src/main/java/com/awsplanner/service/CostEstimationService.java:[149,20] cannot find symbol
+[ERROR]   symbol:   method getScalability()
+[ERROR]   location: variable service of type com.awsplanner.model.AwsService
+[ERROR] /C:/Users/DELL/Desktop/awsP/backend/src/main/java/com/awsplanner/service/CostEstimationService.java:[150,16] cannot find symbol
+[ERROR]   symbol:   method getTraffic()
+[ERROR]   location: variable req of type com.awsplanner.model.UserRequirement
+[ERROR] /C:/Users/DELL/Desktop/awsP/backend/src/main/java/com/awsplanner/service/CostEstimationService.java:[154,20] cannot find symbol
+[ERROR]   symbol:   method getUseCases()
+[ERROR]   location: variable service of type com.awsplanner.model.AwsService
+[ERROR] /C:/Users/DELL/Desktop/awsP/backend/src/main/java/com/awsplanner/service/CostEstimationService.java:[154,47] cannot find symbol
+[ERROR]   symbol:   method getApplicationType()
+[ERROR]   location: variable req of type com.awsplanner.model.UserRequirement
+[ERROR] /C:/Users/DELL/Desktop/awsP/backend/src/main/java/com/awsplanner/service/CostEstimationService.java:[155,47] cannot find symbol
+[ERROR]   symbol:   method getApplicationType()
+[ERROR]   location: variable req of type com.awsplanner.model.UserRequirement
+[ERROR] /C:/Users/DELL/Desktop/awsP/backend/src/main/java/com/awsplanner/service/CostEstimationService.java:[159,27] cannot find symbol
+[ERROR]   symbol:   method getDescription()
+[ERROR]   location: variable service of type com.awsplanner.model.AwsService
+[ERROR] /C:/Users/DELL/Desktop/awsP/backend/src/main/java/com/awsplanner/service/CostEstimationService.java:[169,20] cannot find symbol
+[ERROR]   symbol:   method getApplicationType()
+[ERROR]   location: variable req of type com.awsplanner.model.UserRequirement
+[ERROR] /C:/Users/DELL/Desktop/awsP/backend/src/main/java/com/awsplanner/service/CostEstimationService.java:[180,24] cannot find symbol
+[ERROR]   symbol:   method getDatabaseNeeded()
+[ERROR]   location: variable req of type com.awsplanner.model.UserRequirement
+[ERROR] /C:/Users/DELL/Desktop/awsP/backend/src/main/java/com/awsplanner/service/CostEstimationService.java:[194,24] cannot find symbol
+[ERROR]   symbol:   method getDatabaseNeeded()
+[ERROR]   location: variable req of type com.awsplanner.model.UserRequirement
+[ERROR] /C:/Users/DELL/Desktop/awsP/backend/src/main/java/com/awsplanner/service/CostEstimationService.java:[199,32] cannot find symbol
+[ERROR]   symbol:   method getDatabaseNeeded()
+[ERROR]   location: variable req of type com.awsplanner.model.UserRequirement
+[ERROR] /C:/Users/DELL/Desktop/awsP/backend/src/main/java/com/awsplanner/service/CostEstimationService.java:[221,16] constructor AlternativeArchitecture in class com.awsplanner.model.AlternativeArchitecture cannot be applied to given types;
+[ERROR]   required: no arguments
+[ERROR]   found:    java.lang.String,java.util.List<java.lang.String>,double,java.lang.String
+[ERROR]   reason: actual and formal argument lists differ in length
+[ERROR] /C:/Users/DELL/Desktop/awsP/backend/src/main/java/com/awsplanner/service/CostEstimationService.java:[233,20] cannot find symbol
+[ERROR]   symbol:   method getApplicationType()
+[ERROR]   location: variable req of type com.awsplanner.model.UserRequirement
+[ERROR] /C:/Users/DELL/Desktop/awsP/backend/src/main/java/com/awsplanner/service/CostEstimationService.java:[257,16] constructor AlternativeArchitecture in class com.awsplanner.model.AlternativeArchitecture cannot be applied to given types;
+[ERROR]   required: no arguments
+[ERROR]   found:    java.lang.String,java.util.List<java.lang.String>,double,java.lang.String
+[ERROR]   reason: actual and formal argument lists differ in length
+[ERROR] /C:/Users/DELL/Desktop/awsP/backend/src/main/java/com/awsplanner/repository/ServiceKnowledgeBase.java:[55,27] cannot find symbol
+[ERROR]   symbol:   method getId()
+[ERROR]   location: variable s of type com.awsplanner.model.AwsService
+[ERROR] /C:/Users/DELL/Desktop/awsP/backend/src/main/java/com/awsplanner/repository/ServiceKnowledgeBase.java:[62,27] cannot find symbol
+[ERROR]   symbol:   method getCategory()
+[ERROR]   location: variable s of type com.awsplanner.model.AwsService
+[ERROR] /C:/Users/DELL/Desktop/awsP/backend/src/main/java/com/awsplanner/repository/ServiceKnowledgeBase.java:[68,21] invalid method reference
+[ERROR]   cannot find symbol
+[ERROR]     symbol:   method isMandatory(T)
+[ERROR]     location: class com.awsplanner.model.AwsService
+[ERROR] -> [Help 1]
+[ERROR] 
+[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
+[ERROR] Re-run Maven using the -X switch to enable full debug logging.
+[ERROR] 
+[ERROR] For more information about the errors and possible solutions, please read the following articles:
+[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoFailureException

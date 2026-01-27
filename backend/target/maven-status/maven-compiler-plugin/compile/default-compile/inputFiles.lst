@@ -1,0 +1,13 @@
+C:\Users\DELL\Desktop\awsP\backend\src\main\java\com\awsplanner\AwsPlannerApplication.java
+C:\Users\DELL\Desktop\awsP\backend\src\main\java\com\awsplanner\model\AwsService.java
+C:\Users\DELL\Desktop\awsP\backend\src\main\java\com\awsplanner\repository\ServiceKnowledgeBase.java
+C:\Users\DELL\Desktop\awsP\backend\src\main\java\com\awsplanner\model\Recommendation.java
+C:\Users\DELL\Desktop\awsP\backend\src\main\java\com\awsplanner\model\RecommendedService.java
+C:\Users\DELL\Desktop\awsP\backend\src\main\java\com\awsplanner\service\RequirementService.java
+C:\Users\DELL\Desktop\awsP\backend\src\main\java\com\awsplanner\model\UserRequirement.java
+C:\Users\DELL\Desktop\awsP\backend\src\main\java\com\awsplanner\config\CorsConfig.java
+C:\Users\DELL\Desktop\awsP\backend\src\main\java\com\awsplanner\model\ServiceScore.java
+C:\Users\DELL\Desktop\awsP\backend\src\main\java\com\awsplanner\service\DecisionEngineService.java
+C:\Users\DELL\Desktop\awsP\backend\src\main\java\com\awsplanner\controller\RecommendationController.java
+C:\Users\DELL\Desktop\awsP\backend\src\main\java\com\awsplanner\service\CostEstimationService.java
+C:\Users\DELL\Desktop\awsP\backend\src\main\java\com\awsplanner\model\AlternativeArchitecture.java

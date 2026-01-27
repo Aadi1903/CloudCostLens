@@ -1,0 +1,189 @@
+[
+  {
+    "id": "ec2",
+    "name": "Amazon EC2",
+    "category": "compute",
+    "costLevel": "medium",
+    "scalability": "high",
+    "operationalEffort": "high",
+    "useCases": ["backend-api", "full-stack"],
+    "description": "Virtual servers in the cloud with full control",
+    "mandatory": false
+  },
+  {
+    "id": "lambda",
+    "name": "AWS Lambda",
+    "category": "compute",
+    "costLevel": "low",
+    "scalability": "high",
+    "operationalEffort": "low",
+    "useCases": ["backend-api", "event-driven", "full-stack"],
+    "description": "Serverless compute service",
+    "mandatory": false
+  },
+  {
+    "id": "ecs",
+    "name": "Amazon ECS",
+    "category": "compute",
+    "costLevel": "medium",
+    "scalability": "high",
+    "operationalEffort": "medium",
+    "useCases": ["backend-api", "full-stack"],
+    "description": "Container orchestration service",
+    "mandatory": false
+  },
+  {
+    "id": "elastic-beanstalk",
+    "name": "AWS Elastic Beanstalk",
+    "category": "compute",
+    "costLevel": "medium",
+    "scalability": "medium",
+    "operationalEffort": "low",
+    "useCases": ["backend-api", "full-stack"],
+    "description": "Easy-to-use service for deploying applications",
+    "mandatory": false
+  },
+  {
+    "id": "s3",
+    "name": "Amazon S3",
+    "category": "storage",
+    "costLevel": "low",
+    "scalability": "high",
+    "operationalEffort": "low",
+    "useCases": ["static-website", "file-storage", "full-stack"],
+    "description": "Object storage service",
+    "mandatory": false
+  },
+  {
+    "id": "ebs",
+    "name": "Amazon EBS",
+    "category": "storage",
+    "costLevel": "medium",
+    "scalability": "medium",
+    "operationalEffort": "medium",
+    "useCases": ["backend-api", "full-stack"],
+    "description": "Block storage for EC2 instances",
+    "mandatory": false
+  },
+  {
+    "id": "efs",
+    "name": "Amazon EFS",
+    "category": "storage",
+    "costLevel": "medium",
+    "scalability": "high",
+    "operationalEffort": "low",
+    "useCases": ["file-storage", "full-stack"],
+    "description": "Managed file storage service",
+    "mandatory": false
+  },
+  {
+    "id": "rds",
+    "name": "Amazon RDS",
+    "category": "database",
+    "costLevel": "medium",
+    "scalability": "medium",
+    "operationalEffort": "low",
+    "useCases": ["backend-api", "full-stack"],
+    "description": "Managed relational database service",
+    "mandatory": false
+  },
+  {
+    "id": "dynamodb",
+    "name": "Amazon DynamoDB",
+    "category": "database",
+    "costLevel": "low",
+    "scalability": "high",
+    "operationalEffort": "low",
+    "useCases": ["backend-api", "event-driven", "full-stack"],
+    "description": "Managed NoSQL database service",
+    "mandatory": false
+  },
+  {
+    "id": "aurora",
+    "name": "Amazon Aurora",
+    "category": "database",
+    "costLevel": "high",
+    "scalability": "high",
+    "operationalEffort": "low",
+    "useCases": ["backend-api", "full-stack"],
+    "description": "High-performance managed relational database",
+    "mandatory": false
+  },
+  {
+    "id": "cloudfront",
+    "name": "Amazon CloudFront",
+    "category": "networking",
+    "costLevel": "low",
+    "scalability": "high",
+    "operationalEffort": "low",
+    "useCases": ["static-website", "full-stack"],
+    "description": "Content delivery network (CDN)",
+    "mandatory": false
+  },
+  {
+    "id": "route53",
+    "name": "Amazon Route 53",
+    "category": "networking",
+    "costLevel": "low",
+    "scalability": "high",
+    "operationalEffort": "low",
+    "useCases": ["static-website", "backend-api", "full-stack"],
+    "description": "Scalable DNS and domain registration",
+    "mandatory": false
+  },
+  {
+    "id": "api-gateway",
+    "name": "Amazon API Gateway",
+    "category": "networking",
+    "costLevel": "low",
+    "scalability": "high",
+    "operationalEffort": "low",
+    "useCases": ["backend-api", "event-driven", "full-stack"],
+    "description": "Create, publish, and manage APIs",
+    "mandatory": false
+  },
+  {
+    "id": "sqs",
+    "name": "Amazon SQS",
+    "category": "messaging",
+    "costLevel": "low",
+    "scalability": "high",
+    "operationalEffort": "low",
+    "useCases": ["event-driven", "backend-api"],
+    "description": "Managed message queuing service",
+    "mandatory": false
+  },
+  {
+    "id": "sns",
+    "name": "Amazon SNS",
+    "category": "messaging",
+    "costLevel": "low",
+    "scalability": "high",
+    "operationalEffort": "low",
+    "useCases": ["event-driven", "backend-api"],
+    "description": "Pub/sub messaging and notifications",
+    "mandatory": false
+  },
+  {
+    "id": "cloudwatch",
+    "name": "Amazon CloudWatch",
+    "category": "monitoring",
+    "costLevel": "low",
+    "scalability": "high",
+    "operationalEffort": "low",
+    "useCases": ["backend-api", "full-stack", "event-driven"],
+    "description": "Monitoring and observability service",
+    "mandatory": true
+  },
+  {
+    "id": "iam",
+    "name": "AWS IAM",
+    "category": "security",
+    "costLevel": "low",
+    "scalability": "high",
+    "operationalEffort": "medium",
+    "useCases": ["static-website", "backend-api", "full-stack", "file-storage", "event-driven"],
+    "description": "Identity and access management",
+    "mandatory": true
+  }
+]
