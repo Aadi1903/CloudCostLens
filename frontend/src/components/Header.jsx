@@ -8,7 +8,7 @@ const Header = () => {
         <header className="header">
             <div className="container header-content">
                 <Link to="/" className="logo">
-                    AWS Planner
+                    CloudCostLens
                 </Link>
                 <nav className="nav">
                     <Link

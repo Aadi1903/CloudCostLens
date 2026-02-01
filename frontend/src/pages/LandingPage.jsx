@@ -12,16 +12,16 @@ const LandingPage = () => {
             }}>
                 <div className="container text-center">
                     <h1 style={{ color: 'white', marginBottom: '1.5rem' }}>
-                        CloudCostLens
+                        Where cloud costs make sense
                     </h1>
-                    <p style={{
+                    {/* <p style={{
                         fontSize: '1.25rem',
                         color: 'rgba(255, 255, 255, 0.9)',
                         maxWidth: '700px',
                         margin: '0 auto 2rem'
                     }}>
                         Where cloud costs make sense
-                    </p>
+                    </p> */}
                     <p style={{
                         fontSize: '1rem',
                         color: 'rgba(255, 255, 255, 0.8)',
