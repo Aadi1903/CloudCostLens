@@ -1,0 +1,49 @@
+name: CloudCostLens CI Pipeline
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+
+jobs:
+  build-and-validate:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18
+
+      - name: Install dependencies
+        run: |
+          if [ -f package.json ]; then
+            npm install
+          fi
+
+      - name: Run cost analysis script
+        run: |
+          echo "Running CloudCostLens cost analysis..."
+          if [ -f analyze-costs.js ]; then
+            node analyze-costs.js
+          else
+            echo "Cost analysis script not found, skipping."
+          fi
+
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v3
+
+      - name: Terraform Init
+        working-directory: terraform
+        run: terraform init
+
+      - name: Terraform Validate
+        working-directory: terraform
+        run: terraform validate
+
+      - name: Terraform Plan (No Apply)
+        working-directory: terraform
+        run: terraform plan
