@@ -9,10 +9,13 @@ const FeedbackModal = ({ onClose }) => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const res = await fetch('/api/feedback', {
+            const res = await fetch('https://api.web3forms.com/submit', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(formData)
+                body: JSON.stringify({
+                    access_key: '774681a9-bee8-4e3e-9240-09f077649fa0',
+                    ...formData
+                })
             });
             if (res.ok) setSubmitted(true);
         } catch (err) {
@@ -50,6 +53,7 @@ const FeedbackModal = ({ onClose }) => {
                                 <option value="feature-request">Feature Request</option>
                                 <option value="wrong-recommendation">Wrong Recommendation</option>
                                 <option value="missing-use-case">Missing Use Case</option>
+                                <option value="other">Other</option>
                             </select>
                         </div>
                         <div className="form-group">

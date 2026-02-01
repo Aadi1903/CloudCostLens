@@ -4,6 +4,9 @@ import ServiceCard from '../components/ServiceCard';
 import CostBreakdown from '../components/CostBreakdown';
 import FeedbackModal from '../components/FeedbackModal';
 import { jsPDF } from 'jspdf';
+import ReasoningSection from '../components/ReasoningSection';
+import ArchitectureDiagram from '../components/ArchitectureDiagram';
+import AssumptionsSection from '../components/AssumptionsSection';
 
 const RecommendationPage = () => {
     const navigate = useNavigate();
@@ -252,9 +255,15 @@ const RecommendationPage = () => {
                             </div>
                         </div>
 
+                        {/* Explanatory Sections */}
+                        <div style={{ marginTop: '2rem', marginBottom: '2rem' }}>
+                            <ArchitectureDiagram selectedArchitecture={selectedArchitecture} />
+                            <ReasoningSection selectedArchitecture={selectedArchitecture} requirements={requirements} />
+                        </div>
+
                         {/* Optional Upgrades - now based on selected architecture */}
                         {selectedArchitecture?.optionalUpgrades && selectedArchitecture.optionalUpgrades.length > 0 && (
-                            <div style={{ marginTop: '2rem' }}>
+                            <div style={{ marginBottom: '2rem' }}>
                                 <h3 className="mb-2" style={{ color: 'var(--primary)' }}>Optional Upgrades Available</h3>
                                 <div className="card" style={{ backgroundColor: 'rgba(56, 178, 172, 0.05)', border: '1px solid var(--primary)' }}>
                                     <p style={{ fontSize: '0.95rem', marginBottom: '1rem', fontWeight: '500' }}>
@@ -272,6 +281,8 @@ const RecommendationPage = () => {
                                 </div>
                             </div>
                         )}
+
+                        <AssumptionsSection />
                     </div>
 
                     {/* Cost Breakdown - now based on selected architecture */}
