@@ -1,35 +1,59 @@
-# AWS Service Recommendation & Cost Planning System
+# CloudCostLens: AWS Service Recommendation & Cost Planning Tool
 
-A deterministic, rule-based web application that recommends AWS services based on application requirements and budget constraints.
+A full-stack DevOps portfolio project that recommends AWS architectures based on predefined rules and constraints.
+
+## 🚀 Live Demo
+**[Link to Live Demo](https://cloudcostlens.onrender.com)**
+*(Note: Initial load may take up to 50s as Render spins up the free tier container)*
 
 ## 🎯 Project Overview
+CloudCostLens is a tool designed to help developers and architects estimate costs and select appropriate AWS services for their applications. Unlike black-box AI tools, this system uses a transparent, rule-based decision engine to ensure recommendations are explainable and consistent.
 
-This system helps users choose appropriate AWS services by:
-- Accepting application requirements (type, traffic, storage, budget)
-- Using deterministic filtering and scoring algorithms
-- Providing cost estimates and budget validation
-- Suggesting alternative architectures
+The project demonstrates a **Cloud-Native & DevOps-focused** approach, showcasing how to containerize a full-stack application, automate validation with CI, and structure Infrastructure as Code (IaC) for design purposes.
 
-**Key Principle**: No AI/LLM-based decisions - all recommendations are rule-based, explainable, and repeatable.
+## ✨ Learning Outcomes
+This project serves as a practical demonstration of:
+- **Full-Stack Containerization**: Packaging React and Spring Boot into a single Docker image for simple deployment.
+- **CI Automation**: Using GitHub Actions to validate builds and check Terraform code quality.
+- **Infrastructure as Code**: Using Terraform to model cloud resources (Design-only).
+- **Cloud Architecture**: Designing scalable serverless and container-based solutions.
 
 ## 🏗️ Architecture
+The application follows a monolithic container pattern to maximize free-tier hosting efficiency:
 
 ```
-Frontend (React) ←→ Backend (Spring Boot) ←→ Service Knowledge Base (JSON)
+Frontend (React) ←→ Backend (Spring Boot) ←→ Knowledge Base (JSON)
+       |                     |
+       └─────────┬───────────┘
+                 ↓
+          Docker Container
 ```
 
-### Backend Services
-- **Requirement Service**: Validates and normalizes user input
-- **Decision Engine Service**: Filters, scores, and ranks AWS services
-- **Cost Estimation Service**: Calculates costs and suggests alternatives
-- **Service Knowledge Base**: Loads AWS service metadata and pricing
+- **Frontend**: React (Vite) for the UI.
+- **Backend**: Spring Boot 3 for logic and APIs.
+- **Deployment**: Both run inside a single Docker container, with the backend serving the frontend static assets.
 
-### Frontend Pages
-- **Landing Page**: Hero section and problem/solution overview
-- **How It Works**: Visual explanation of decision process
-- **Requirement Form**: User input collection
-- **Recommendation Page**: Display recommended architecture
-- **About Page**: Project information and limitations
+## 🚀 Deployment & DevOps
+
+### Dockerization
+The project uses a multi-stage `Dockerfile` to optimize the image size:
+1.  **Build Frontend**: Compiles React code to static assets.
+2.  **Build Backend**: Compiles Java Spring Boot application.
+3.  **Run**: Packages the JAR (with embedded frontend) into a lightweight OpenJDK image.
+
+### Cloud Deployment (Render)
+The application is deployed on **Render** using their Docker runtime. This showcases portability—the exact same container runs locally and in the cloud.
+
+### Continuous Integration (CI)
+GitHub Actions is configured to ensure code quality on every push:
+- **Build Validation**: Compiles the backend to ensure no compilation errors.
+- **Terraform Validation**: Runs `terraform validate` to ensure IaC syntax is correct.
+
+## ☁️ Infrastructure as Code (Terraform)
+Terraform is included in the `terraform/` directory to demonstrate **Infrastructure as Design**.
+*   **Purpose**: To model what the production infrastructure *would* look like on AWS (ECS, RDS, Load Balancers – conceptual design).
+*   **State**: Local-only (No remote state).
+*   **Execution**: Used for `terraform plan` and validation only. **No real resources are provisioned** to avoid cloud costs.
 
 ## 📋 Prerequisites
 
@@ -40,10 +64,10 @@ Frontend (React) ←→ Backend (Spring Boot) ←→ Service Knowledge Base (JSO
 ### Frontend
 - Node.js 16+ and npm
 
-## 🚀 Getting Started
+Note: In production and demo environments, the application is run as a single Docker container. Separate frontend/backend runs are for local development convenience only.
+## 💻 Local Development
 
 ### 1. Start the Backend
-
 ```bash
 cd backend
 
@@ -54,21 +78,17 @@ mvn spring-boot:run
 ./mvnw spring-boot:run    # Linux/Mac
 mvnw.cmd spring-boot:run  # Windows
 ```
-
 Backend will start on `http://localhost:8080`
 
 ### 2. Start the Frontend
-
 ```bash
 cd frontend
 npm install  # First time only
 npm run dev
 ```
-
 Frontend will start on `http://localhost:5173`
 
 ### 3. Access the Application
-
 Open your browser and navigate to `http://localhost:5173`
 
 ## 🧪 Testing the System
@@ -80,7 +100,6 @@ Open your browser and navigate to `http://localhost:5173`
 - Database: No
 - Operational Effort: Low
 - Budget: $20
-
 **Expected**: S3 + CloudFront + IAM
 
 ### Test Scenario 2: Backend API
@@ -90,7 +109,6 @@ Open your browser and navigate to `http://localhost:5173`
 - Database: Yes
 - Operational Effort: Low
 - Budget: $100
-
 **Expected**: Lambda + API Gateway + DynamoDB/RDS + CloudWatch + IAM
 
 ### Test Scenario 3: Full-Stack Application
@@ -100,64 +118,24 @@ Open your browser and navigate to `http://localhost:5173`
 - Database: Yes
 - Operational Effort: Medium
 - Budget: $200
-
 **Expected**: ECS + RDS + S3 + CloudFront + CloudWatch + IAM
 
 ## 📁 Project Structure
 
 ```
 awsP/
-├── backend/
-│   ├── src/main/java/com/awsplanner/
-│   │   ├── AwsPlannerApplication.java
-│   │   ├── controller/
-│   │   │   └── RecommendationController.java
-│   │   ├── service/
-│   │   │   ├── RequirementService.java
-│   │   │   ├── DecisionEngineService.java
-│   │   │   └── CostEstimationService.java
-│   │   ├── model/
-│   │   │   ├── UserRequirement.java
-│   │   │   ├── AwsService.java
-│   │   │   ├── ServiceScore.java
-│   │   │   ├── Recommendation.java
-│   │   │   └── ...
-│   │   ├── repository/
-│   │   │   └── ServiceKnowledgeBase.java
-│   │   └── config/
-│   │       └── CorsConfig.java
-│   ├── src/main/resources/
-│   │   ├── application.properties
-│   │   └── data/
-│   │       ├── aws-services.json
-│   │       └── pricing-table.json
-│   └── pom.xml
-├── frontend/
-│   ├── src/
-│   │   ├── App.jsx
-│   │   ├── main.jsx
-│   │   ├── index.css
-│   │   ├── pages/
-│   │   │   ├── LandingPage.jsx
-│   │   │   ├── HowItWorksPage.jsx
-│   │   │   ├── RequirementFormPage.jsx
-│   │   │   ├── RecommendationPage.jsx
-│   │   │   └── AboutPage.jsx
-│   │   ├── components/
-│   │   │   ├── Header.jsx
-│   │   │   ├── Footer.jsx
-│   │   │   ├── ServiceCard.jsx
-│   │   │   └── CostBreakdown.jsx
-│   │   └── api/
-│   │       └── recommendationApi.js
-│   └── package.json
-└── README.md
+├── backend/            # Spring Boot Application
+├── frontend/           # React Application
+├── terraform/          # IaC Definitions (Design-only)
+├── .github/workflows/  # CI Configurations
+├── Dockerfile          # Multi-stage build
+└── README.md           # Documentation
 ```
 
 ## 🔧 API Endpoints
 
 ### POST /api/recommend
-Get AWS service recommendations
+Get AWS service recommendations.
 
 **Request Body**:
 ```json
@@ -171,41 +149,8 @@ Get AWS service recommendations
 }
 ```
 
-**Response**:
-```json
-{
-  "architecture": [
-    {
-      "service": "AWS Lambda",
-      "category": "compute",
-      "reason": "Serverless, low operational effort",
-      "estimatedCost": 15.0
-    }
-  ],
-  "totalCost": 65.0,
-  "budget": 100.0,
-  "withinBudget": true,
-  "alternatives": [],
-  "message": "Architecture fits within your budget!"
-}
-```
-
 ### GET /api/services
-Get all supported AWS services
-
-### GET /api/use-cases
-Get supported use cases
-
-### GET /api/health
-Health check endpoint
-
-## 🎨 Design System
-
-The frontend uses a modern design system with:
-- **Fonts**: Inter (body), Poppins (headings)
-- **Colors**: Primary (#FF6B35), Secondary (#004E89)
-- **Components**: Cards, buttons, forms with consistent styling
-- **Responsive**: Mobile-friendly grid layouts
+Get all supported AWS services.
 
 ## 🧮 Decision Engine Logic
 
@@ -215,14 +160,7 @@ Total Score = (Cost Match × 0.4) + (Scalability Match × 0.3) +
               (Operational Match × 0.2) + (Use Case Match × 0.1)
 ```
 
-### Decision Flow
-1. **Filter**: Remove services that don't match use case or constraints
-2. **Score**: Rate each eligible service (0-100 scale)
-3. **Rank**: Sort by score and select top service per category
-4. **Estimate**: Calculate costs and validate budget
-
 ## 📊 Supported AWS Services (17 total)
-
 - **Compute**: EC2, Lambda, ECS, Elastic Beanstalk
 - **Storage**: S3, EBS, EFS
 - **Database**: RDS, DynamoDB, Aurora
@@ -232,27 +170,18 @@ Total Score = (Cost Match × 0.4) + (Scalability Match × 0.3) +
 - **Security**: IAM
 
 ## ⚠️ Limitations
-
-- **Approximate Pricing**: Educational estimates, not actual AWS pricing
-- **No Real Provisioning**: Does not deploy actual AWS resources
-- **Limited Services**: 17 services, not full AWS catalog
-- **Target Audience**: Small to medium workloads
-- **Deterministic Only**: Rule-based logic may not cover all edge cases
+- **Educational Scope**: Designed for portfolio demonstration.
+- **No Real AWS Provisioning**: Terraform is for design; no bills are incurred.
+- **Approximate Pricing**: Educational estimates, not actual AWS pricing.
 
 ## 🛠️ Technology Stack
-
 - **Backend**: Java 17, Spring Boot 3.2.1, Maven
 - **Frontend**: React 18, Vite, React Router
-- **Data**: JSON-based service metadata and pricing
+- **DevOps**: Docker, GitHub Actions, Terraform
+- **Cloud**: Render (Hosting), AWS (Architecture Design)
 
 ## 📝 License
-
-Educational project - not for production use
-
-## 🤝 Contributing
-
-This is an educational project demonstrating deterministic decision-making for AWS service selection.
+Educational project - not for production use.
 
 ---
-
 **Note**: This tool is not affiliated with Amazon Web Services. All AWS service names and trademarks belong to Amazon.
