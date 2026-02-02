@@ -11,15 +11,20 @@ FROM maven:3.9-eclipse-temurin-17 AS backend-build
 WORKDIR /backend
 COPY backend/pom.xml .
 RUN mvn dependency:go-offline
-COPY backend/ .
+COPY backend/src ./src
+
+# Copy React build output into Spring Boot static resources directory
+COPY --from=frontend-build /frontend/dist ./src/main/resources/static
+
+# Build Spring Boot JAR with embedded React files
 RUN mvn clean package -DskipTests
 
 # ---------- FINAL IMAGE ----------
 FROM eclipse-temurin:17-jdk-alpine
 WORKDIR /app
 
+# Copy only the self-contained JAR (includes React files inside)
 COPY --from=backend-build /backend/target/*.jar app.jar
-COPY --from=frontend-build /frontend/dist /app/static
 
 EXPOSE 8080
 ENTRYPOINT ["java","-jar","app.jar"]

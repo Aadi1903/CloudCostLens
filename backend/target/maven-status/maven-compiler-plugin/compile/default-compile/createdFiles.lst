@@ -2,6 +2,7 @@ com\awsplanner\repository\ServiceKnowledgeBase$2.class
 com\awsplanner\repository\ServiceKnowledgeBase$1.class
 com\awsplanner\model\RecommendedService.class
 com\awsplanner\service\DecisionEngineService.class
+com\awsplanner\controller\FrontendController.class
 com\awsplanner\model\ServiceScore.class
 com\awsplanner\repository\ServiceKnowledgeBase.class
 com\awsplanner\model\AlternativeArchitecture.class
