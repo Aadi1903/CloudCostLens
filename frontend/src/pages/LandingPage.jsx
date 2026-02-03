@@ -5,13 +5,9 @@ const LandingPage = () => {
     return (
         <div>
             {/* Hero Section */}
-            <section className="section" style={{
-                background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
-                color: 'white',
-                padding: '5rem 0'
-            }}>
+            <section className="hero-section">
                 <div className="container text-center">
-                    <h1 style={{ color: 'white', marginBottom: '1.5rem' }}>
+                    <h1 className="hero-title">
                         Where cloud costs make sense
                     </h1>
                     {/* <p style={{

@@ -31,7 +31,7 @@ public class FrontendController {
         return "forward:/index.html";
     }
     
-    @GetMapping("/about")
+    @GetMapping("/abou//t")
     public String about() {
         return "forward:/index.html";
     }

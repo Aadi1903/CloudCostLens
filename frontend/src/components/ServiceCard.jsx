@@ -16,12 +16,7 @@ const ServiceCard = ({ service, category, reason, cost }) => {
 
     return (
         <div className="card">
-            <div style={{
-                display: 'flex',
-                justifyContent: 'space-between',
-                alignItems: 'start',
-                marginBottom: '1rem'
-            }}>
+            <div className="service-card-header">
                 <div>
                     <h4 className="card-title">{service}</h4>
                     <span style={{

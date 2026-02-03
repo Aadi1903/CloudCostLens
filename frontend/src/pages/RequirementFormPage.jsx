@@ -96,7 +96,7 @@ const RequirementFormPage = () => {
                         {/* Expected Traffic */}
                         <div className="form-group">
                             <label className="form-label">Expected Traffic</label>
-                            <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
+                            <div className="form-radio-group">
                                 {['low', 'medium', 'high'].map(level => (
                                     <label key={level} style={{
                                         flex: 1,
@@ -186,7 +186,7 @@ const RequirementFormPage = () => {
                         {/* Operational Preference */}
                         <div className="form-group">
                             <label className="form-label">Operational Preference</label>
-                            <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
+                            <div className="form-radio-group">
                                 {[
                                     { value: 'low', label: 'Low Maintenance', desc: 'Fully managed services' },
                                     { value: 'medium', label: 'Medium Maintenance', desc: 'Balanced control' },
