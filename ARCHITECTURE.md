@@ -8,13 +8,13 @@ To maximize free-tier hosting efficiency (e.g., on Render), the application uses
 
 ```mermaid
 flowchart TD
-    User([User / Browser])
+    User(["User / Browser"])
     
     subgraph DockerContainer [Docker Container (Render / Local)]
         direction TB
-        React[React.js Frontend\n(Static Assets)]
-        Spring[Spring Boot 3 Backend\n(REST API & Static File Server)]
-        KnowledgeBase[(Knowledge Base\nJSON Maps)]
+        React["React.js Frontend\n(Static Assets)"]
+        Spring["Spring Boot 3 Backend\n(REST API & Static File Server)"]
+        KnowledgeBase[("Knowledge Base\nJSON Maps")]
         
         React <-->|API Calls| Spring
         Spring <-->|Reads Rules| KnowledgeBase
@@ -37,20 +37,20 @@ While the live demo runs in a single container, a real-world enterprise deployme
 
 ```mermaid
 flowchart LR
-    User([User / Browser])
+    User(["User / Browser"])
     
     subgraph AWS [AWS Cloud Infrastructure]
         direction TB
         
-        ALB[Application Load Balancer]
+        ALB["Application Load Balancer"]
         
         subgraph ASG [Auto Scaling Group]
-            EC2_1[EC2 Instance\n(App Server)]
-            EC2_2[EC2 Instance\n(App Server)]
+            EC2_1["EC2 Instance\n(App Server)"]
+            EC2_2["EC2 Instance\n(App Server)"]
         end
         
-        IAM[[IAM Role\nRead-Only Access]]
-        S3[(Amazon S3\nBilling Data)]
+        IAM[["IAM Role\nRead-Only Access"]]
+        S3[("Amazon S3\nBilling Data")]
         
         ALB --> EC2_1
         ALB --> EC2_2
