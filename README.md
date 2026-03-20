@@ -68,6 +68,14 @@ Note: In production and demo environments, the application is run as a single Do
 ## 💻 Local Development
 
 ### 1. Start the Backend
+
+**Windows Users**: Simply double-click or run the included batch script from the root directory:
+```cmd
+start-backend.bat
+```
+*(This script will verify your Java & Maven installation and launch the backend.)*
+
+**Manual Approach (All Platforms)**:
 ```bash
 cd backend
 
@@ -81,6 +89,13 @@ mvnw.cmd spring-boot:run  # Windows
 Backend will start on `http://localhost:8080`
 
 ### 2. Start the Frontend
+
+**Windows Users**: Simply double-click or run the included batch script from the root directory:
+```cmd
+start-frontend.bat
+```
+
+**Manual Approach (All Platforms)**:
 ```bash
 cd frontend
 npm install  # First time only
