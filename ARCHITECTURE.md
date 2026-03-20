@@ -10,7 +10,7 @@ To maximize free-tier hosting efficiency (e.g., on Render), the application uses
 flowchart TD
     User(["User / Browser"])
     
-    subgraph DockerContainer [Docker Container (Render / Local)]
+    subgraph DockerContainer [Docker Container - Render and Local]
         direction TB
         React["React.js Frontend\n(Static Assets)"]
         Spring["Spring Boot 3 Backend\n(REST API & Static File Server)"]
