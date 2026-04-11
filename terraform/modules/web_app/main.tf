@@ -46,8 +46,12 @@ resource "aws_security_group" "web_sg" {
   }
 }
 
+data "aws_ssm_parameter" "al2023" {
+  name = "/aws/service/ami-amazon-linux-latest/al2023-ami-kernel-6.1-x86_64"
+}
+
 resource "aws_instance" "web" {
-  ami                    = var.ami_id
+  ami                    = data.aws_ssm_parameter.al2023.value
   instance_type          = var.instance_type
   vpc_security_group_ids = [aws_security_group.web_sg.id]
 

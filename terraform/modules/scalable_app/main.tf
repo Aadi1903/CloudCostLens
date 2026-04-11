@@ -119,9 +119,13 @@ resource "aws_lb_listener" "http" {
   }
 }
 
+data "aws_ssm_parameter" "al2023" {
+  name = "/aws/service/ami-amazon-linux-latest/al2023-ami-kernel-6.1-x86_64"
+}
+
 resource "aws_launch_template" "main" {
   name_prefix   = "${var.project_name}-lt-"
-  image_id      = var.ami_id
+  image_id      = data.aws_ssm_parameter.al2023.value
   instance_type = var.instance_type
 
   vpc_security_group_ids = [aws_security_group.app_sg.id]
@@ -148,6 +152,7 @@ resource "aws_launch_template" "main" {
 
 resource "aws_autoscaling_group" "main" {
   name                = "${var.project_name}-asg"
+  force_delete        = true
   min_size            = var.min_size
   max_size            = var.max_size
   desired_capacity    = var.desired_capacity

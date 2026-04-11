@@ -170,12 +170,12 @@ public class TerraformService {
             deployment.setCompletedAt(LocalDateTime.now());
             appendLog(deployment, "🎉 Deployment COMPLETED successfully!");
             
-            // Schedule auto-destroy after 30 minutes
-            appendLog(deployment, "⏱ Auto-destroy scheduled in 30 minutes to manage costs.");
+            // Schedule auto-destroy after 2 hours
+            appendLog(deployment, "⏱ Auto-destroy scheduled in 2 hours to manage costs.");
             taskScheduler.schedule(() -> {
                 log.info("Starting scheduled auto-destroy for deployment {}", deploymentId);
                 runDestroy(deploymentId);
-            }, Instant.now().plus(Duration.ofMinutes(30)));
+            }, Instant.now().plus(Duration.ofHours(2)));
 
             deploymentRepository.save(deployment);
 

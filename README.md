@@ -24,7 +24,7 @@ Unlike static calculators, CloudCostLens provides **Infrastructure as Code (IaC)
 - **Resource Inspector**: Deep-visibility into provisioned AWS resources (IDs, IPs, and ARNs) immediately post-deployment.
 
 ### 🛡️ Safety & Reliability
-- **Auto-Destroy Utility**: Intelligent 30-minute scheduled destruction of resources to prevent runaway cloud costs.
+- **Auto-Destroy Utility**: Intelligent 2-hour scheduled destruction of resources to prevent runaway cloud costs.
 - **Pre-flight Checks**: Automated verification of Terraform installations and AWS credentials before provisioning starts.
 - **JWT Security**: Role-based access control ensuring only authorized Admins can trigger cloud mutations.
 

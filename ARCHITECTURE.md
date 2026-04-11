@@ -1,73 +1,66 @@
-# CloudCostLens Architecture
+# CloudCostLens Systems Architecture
 
-This document outlines both the **Local/Deployment Architecture** used for the live demo and the **Cloud Design Architecture** modeled using Terraform.
-
-## 1. Local & Deployment Architecture (Single Container)
-
-To maximize free-tier hosting efficiency (e.g., on Render), the application uses a **Monolithic Container Pattern**. The React frontend compiles into static assets which are then served directly by the Spring Boot backend inside a single Docker container.
-
-```mermaid
-flowchart TD
-    User(["User / Browser"])
-    
-    subgraph DockerContainer [Docker Container - Render and Local]
-        direction TB
-        React["React.js Frontend\n(Static Assets)"]
-        Spring["Spring Boot 3 Backend\n(REST API & Static File Server)"]
-        KnowledgeBase[("Knowledge Base\nJSON Maps")]
-        
-        React <-->|API Calls| Spring
-        Spring <-->|Reads Rules| KnowledgeBase
-    end
-    
-    User -->|HTTP/HTTPS| Spring
-    Spring -->|Serves index.html| React
-```
-
-**Benefits of this approach:**
-- **Cost-Effective:** Requires only one free-tier web service instance.
-- **Simplified Deployment:** No need to configure CORS or manage separate deployments for frontend and backend.
-- **Portability:** The exact same image runs identically on an engineer's local machine and in the cloud.
+This document details the internal design of the CloudCostLens platform, separating the **Local/Deployment Platform Architecture** from the **Cloud Provisioning Architecture** that it orchestrates.
 
 ---
 
-## 2. Cloud Production Architecture (Design)
+## 1. Platform Architecture (Dockerized Stack)
 
-While the live demo runs in a single container, a real-world enterprise deployment on AWS would distribute these components. The `terraform/` directory models this conceptual production architecture.
+CloudCostLens operates using a distributed, containerized microservices architecture orchestrated via Docker Compose.
 
 ```mermaid
-flowchart LR
-    User(["User / Browser"])
+flowchart TD
+    User(["End User / Browser"])
     
-    subgraph AWS [AWS Cloud Infrastructure]
+    subgraph DockerHost [Docker Compose Environment]
         direction TB
+        Frontend["Vite + React\n(Port 5173)\nUI & Metrics Dashboard"]
+        Backend["Spring Boot 3 REST API\n(Port 8080)\nDecision Engine & Pipeline Manager"]
+        TerraformCli["Embedded Terraform CLI\n(Process Orchestration)"]
         
-        ALB["Application Load Balancer"]
-        
-        subgraph ASG [Auto Scaling Group]
-            EC2_1["EC2 Instance\n(App Server)"]
-            EC2_2["EC2 Instance\n(App Server)"]
-        end
-        
-        IAM[["IAM Role\nRead-Only Access"]]
-        S3[("Amazon S3\nBilling Data")]
-        
-        ALB --> EC2_1
-        ALB --> EC2_2
-        
-        EC2_1 -.->|Assumes| IAM
-        EC2_2 -.->|Assumes| IAM
-        
-        IAM -->|Read Access| S3
+        Frontend <-->|JSON over HTTP| Backend
+        Backend -->|ProcessBuilder execution| TerraformCli
     end
     
-    User -->|HTTPS| ALB
+    Supabase[("Supabase (PostgreSQL)\nCloud DB (Auth & Deployment History)")]
+    AWSCloud[("AWS Cloud Environment")]
+    SSMParameter[("AWS Systems Manager\n(Dynamic AMI Resolution)")]
+
+    User <-->|HTTP/HTTPS| Frontend
+    Backend <-->|JDBC + TLS| Supabase
+    TerraformCli <-->|AWS APIs| AWSCloud
+    TerraformCli -->|Fetches latest AMIs| SSMParameter
 ```
 
-### Terraform Resources Modeled
-The existing Terraform manifests (`terraform/main.tf`) define the foundational pieces of this architecture:
-- **`aws_instance`**: The EC2 instance(`t2.micro`) serving as the application host.
-- **`aws_s3_bucket`**: Secure storage bucket for hypothetical AWS billing data.
-- **`aws_iam_role`**: A restrictive IAM role allowing the EC2 instances to read from the S3 bucket safely.
+### Key Components:
+- **Frontend (Vite/React):** A responsive, high-performance UI serving the real-time pipeline visualizer and architecture dashboard.
+- **Backend (Spring Boot):** The intelligent core evaluating user requirements against the AWS Service Knowledge Base. Also manages external Terraform `Process` instances natively.
+- **Persisted Volumes:** Terraform state and generated variables are saved securely to a local volume (`/app/terraform/workspaces`), ensuring complete recovery and state integrity during container restarts.
+- **Supabase Cloud:** Instead of a local fragile DB, history and authentication are persisted across environments using Supabase (PostgreSQL).
 
-*(Note: These Terraform configurations are provided for design and validation only. They are not intended to be applied unless you wish to incur AWS charges).*
+---
+
+## 2. Cloud Provisioning Architecture (Modular Infrastructure as Code)
+
+When a deployment is triggered, CloudCostLens generates variables and applies one of its highly-optimized **Terraform Modules**.
+
+### Supported Topologies
+
+#### 1. Scalable App Module (`scalable_app`)
+Designed for high-traffic, decoupled enterprise applications.
+- **Application Load Balancer (ALB)** distributing traffic strictly to instances.
+- **Auto Scaling Group (ASG)** spanning multiple Availability Zones.
+- **EC2 Launch Templates** dynamically requesting the latest **Amazon Linux 2023** AMI via AWS Systems Manager Parameter Store to avoid AMI expiration rot.
+- *Failsafe:* ASGs are equipped with `force_delete = true` to guarantee clean teardowns and prevent orphan AWS charges.
+
+#### 2. Web App Module (`web_app`)
+Designed for low-traffic or initial MVP backend deployments.
+- Standalone EC2 instance protected by a strict ingress Security Group.
+- Publicly accessible via HTTP/TCP.
+
+#### 3. Storage App Module (`storage_app`)
+Designed for static assets or data-lake foundational layers.
+- Private Amazon S3 bucket architecture.
+
+### Automatic Lifecycle Management
+To ensure this platform remains cost-neutral during evaluations, the Spring Backend employs a `ThreadPoolTaskScheduler`. Every successful provision initiates a background countdown timer that will forcibly trigger `terraform destroy` after **2 hours**, tearing down all cloud infrastructure.
