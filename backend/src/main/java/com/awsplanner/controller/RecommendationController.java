@@ -5,12 +5,14 @@ import com.awsplanner.repository.ServiceKnowledgeBase;
 import com.awsplanner.service.CostEstimationService;
 import com.awsplanner.service.DecisionEngineService;
 import com.awsplanner.service.RequirementService;
+import com.awsplanner.service.TerraformService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -33,6 +35,9 @@ public class RecommendationController {
     
     @Autowired
     private ServiceKnowledgeBase knowledgeBase;
+
+    @Autowired
+    private TerraformService terraformService;
     
     /**
      * Main endpoint: Get AWS service recommendations
@@ -126,12 +131,32 @@ public class RecommendationController {
      * GET /api/health
      */
     @GetMapping("/health")
-    public ResponseEntity<Map<String, String>> healthCheck() {
-        Map<String, String> health = new HashMap<>();
+    public ResponseEntity<Map<String, Object>> healthCheck() {
+        boolean credOk = terraformService.hasAwsCredentials();
+        Map<String, Object> health = new HashMap<>();
         health.put("status", "UP");
-        health.put("service", "AWS Recommendation System");
-        health.put("version", "1.0.0");
-        
+        health.put("service", "CloudCostLens — DevSecOps Platform");
+        health.put("version", "2.0.0");
+        health.put("timestamp", LocalDateTime.now().toString());
+        health.put("awsCredentials", credOk ? "CONFIGURED" : "MISSING");
+        health.put("awsCredentialDetail", terraformService.credentialStatus());
+        health.put("terraformReady", credOk);
         return ResponseEntity.ok(health);
+    }
+
+    /**
+     * AWS credential status — used by frontend to show warning banner.
+     * GET /api/health/credentials
+     */
+    @GetMapping("/health/credentials")
+    public ResponseEntity<Map<String, Object>> credentialStatus() {
+        boolean credOk = terraformService.hasAwsCredentials();
+        Map<String, Object> result = new HashMap<>();
+        result.put("configured", credOk);
+        result.put("detail", terraformService.credentialStatus());
+        result.put("message", credOk
+            ? "AWS credentials are configured and ready."
+            : "AWS credentials are missing. Set AWS_ACCESS_KEY_ID and AWS_SECRET_ACCESS_KEY in your .env file and restart the backend.");
+        return ResponseEntity.ok(result);
     }
 }

@@ -1,3 +1,10 @@
+##############################################################
+# Root Terraform Configuration
+# Used for: terraform validate in CI/CD (Jenkinsfile)
+# NOT used for actual deployments — those use
+# terraform/environments/dynamic/ (via TerraformService.java)
+##############################################################
+
 terraform {
   required_version = ">= 1.3.0"
 
@@ -9,46 +16,8 @@ terraform {
   }
 }
 
+# Provider configured via env vars:
+#   AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY, AWS_DEFAULT_REGION
 provider "aws" {
-  region                      = var.aws_region
-  skip_credentials_validation = true
-  skip_requesting_account_id  = true
-  skip_metadata_api_check     = true
-}
-
-
-# Conceptual app server
-resource "aws_instance" "cloudcostlens_app" {
-  ami           = "ami-0dummyvalue"
-  instance_type = "t2.micro"
-
-  tags = {
-    Name = "cloudcostlens-app"
-    Project = "CloudCostLens"
-  }
-}
-
-# Storage for billing data
-resource "aws_s3_bucket" "billing_data" {
-  bucket = "cloudcostlens-billing-data-demo"
-
-  tags = {
-    Project = "CloudCostLens"
-  }
-}
-
-# IAM role (read-only billing access – conceptual)
-resource "aws_iam_role" "billing_read_role" {
-  name = "cloudcostlens-billing-read-role"
-
-  assume_role_policy = jsonencode({
-    Version = "2012-10-17"
-    Statement = [{
-      Effect = "Allow"
-      Principal = {
-        Service = "ec2.amazonaws.com"
-      }
-      Action = "sts:AssumeRole"
-    }]
-  })
+  region = var.aws_region
 }

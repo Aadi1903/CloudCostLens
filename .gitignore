@@ -1,0 +1,45 @@
+# ====================
+# OS / IDE
+# ====================
+.idea/
+.vscode/
+*.swp
+*.swo
+.DS_Store
+Thumbs.db
+
+# ====================
+# Backend (Maven/Spring)
+# ====================
+backend/target/
+backend/build.log
+backend/compile_error.log
+backend/error.log
+backend/*.db
+backend/*.db-journal
+
+# ====================
+# Terraform Automation
+# ====================
+# We MUST ignore the workspaces as they contain local provider binaries and state files
+terraform/workspaces/
+terraform/.terraform/
+*.tfstate
+*.tfstate.backup
+.terraform.lock.hcl
+
+# ====================
+# Frontend (Node/Vite)
+# ====================
+frontend/node_modules/
+frontend/dist/
+frontend/dist-ssr/
+frontend/*.local
+frontend/stats.html
+
+# ====================
+# Sensitive
+# ====================
+.env
+.env.local
+Credentials.json

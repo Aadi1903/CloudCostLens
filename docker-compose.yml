@@ -1,0 +1,41 @@
+services:
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: ccl-backend
+    ports:
+      - "8080:8080"
+    # Mount terraform folder so the app can use templates and persist state
+    volumes:
+      - ./terraform:/app/terraform
+    env_file:
+      - .env
+    environment:
+      - SERVER_PORT=8080
+      # Override paths for the container environment
+      - TERRAFORM_WORKSPACE_BASE=/app/terraform/workspaces
+      - TERRAFORM_ENVIRONMENT_PATH=/app/terraform/environments/dynamic
+      - JAVA_TOOL_OPTIONS=-Djava.net.preferIPv4Stack=true
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://aws-1-ap-northeast-2.pooler.supabase.com:6543/postgres?prepareThreshold=0&ssl=true&sslmode=require
+      - SPRING_DATASOURCE_USERNAME=postgres.mdcrhrvhxfbkseuozkea
+      - SPRING_DATASOURCE_PASSWORD=${SUPABASE_DB_PASSWORD}
+    restart: always
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: ccl-frontend
+    ports:
+      - "5173:5173"
+    depends_on:
+      - backend
+    # Vite environment variables must start with VITE_
+    environment:
+      - VITE_API_URL=http://localhost:8080/api
+    restart: always
+
+networks:
+  default:
+    name: cloudcostlens-net
