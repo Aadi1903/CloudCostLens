@@ -16,23 +16,8 @@ public class FrontendController {
         return "forward:/index.html";
     }
     
-    @GetMapping("/how-it-works")
-    public String howItWorks() {
-        return "forward:/index.html";
-    }
-    
-    @GetMapping("/requirements")
-    public String requirements() {
-        return "forward:/index.html";
-    }
-    
-    @GetMapping("/recommendation")
-    public String recommendation() {
-        return "forward:/index.html";
-    }
-    
-    @GetMapping("/abou//t")
-    public String about() {
+    @GetMapping({"/login", "/how-it-works", "/requirements", "/recommendation", "/deployments", "/history", "/about"})
+    public String forward() {
         return "forward:/index.html";
     }
 }
