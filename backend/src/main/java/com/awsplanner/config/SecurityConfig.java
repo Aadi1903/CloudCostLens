@@ -68,6 +68,8 @@ public class SecurityConfig {
                         .requestMatchers("/api/deploy").hasRole("ADMIN")
                         .requestMatchers("/api/deploy/*/stop").hasRole("ADMIN")
                         .requestMatchers("/api/deploy/*/destroy").hasRole("ADMIN")
+                        .requestMatchers("/", "/index.html", "/static/**", "/assets/**", "/*.js", "/*.css", "/*.ico", "/*.png", "/*.svg").permitAll()
+                        .requestMatchers("/login", "/how-it-works", "/requirements", "/recommendation", "/deployments", "/history", "/about").permitAll()
                         .anyRequest().authenticated()
                 )
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
