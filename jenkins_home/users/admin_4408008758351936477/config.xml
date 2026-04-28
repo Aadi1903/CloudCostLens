@@ -43,5 +43,17 @@
       </roles>
       <timestamp>1777405624919</timestamp>
     </jenkins.security.LastGrantedAuthoritiesProperty>
+    <io.jenkins.plugins.thememanager.ThemeUserProperty plugin="theme-manager@327.v780d7096ec29"/>
+    <com.cloudbees.plugins.credentials.UserCredentialsProvider_-UserCredentialsProperty plugin="credentials@1453.v9b_a_29777a_b_fd">
+      <domainCredentialsMap class="hudson.util.CopyOnWriteMap$Hash"/>
+    </com.cloudbees.plugins.credentials.UserCredentialsProvider_-UserCredentialsProperty>
+    <hudson.tasks.Mailer_-UserProperty plugin="mailer@525.v2458b_d8a_1a_71"/>
+    <hudson.plugins.emailext.watching.EmailExtWatchAction_-UserProperty plugin="email-ext@1933.v45cec755423f">
+      <triggers/>
+      <projectName></projectName>
+    </hudson.plugins.emailext.watching.EmailExtWatchAction_-UserProperty>
+    <org.jenkinsci.plugins.displayurlapi.user.PreferredProviderUserProperty plugin="display-url-api@2.217.va_6b_de84cc74b_">
+      <providerId>default</providerId>
+    </org.jenkinsci.plugins.displayurlapi.user.PreferredProviderUserProperty>
   </properties>
 </user>

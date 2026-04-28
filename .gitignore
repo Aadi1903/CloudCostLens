@@ -38,6 +38,11 @@ frontend/*.local
 frontend/stats.html
 
 # ====================
+# DevSecOps / Infrastructure
+# ====================
+jenkins_home/
+
+# ====================
 # Sensitive
 # ====================
 .env
