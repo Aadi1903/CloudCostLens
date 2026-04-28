@@ -89,15 +89,31 @@ The easiest way to run the entire platform is using Docker Compose. This automat
 ## 📂 Project Structure
 ```
 CloudCostLens/
-├── backend/            # Spring Boot (API & Decision Engine)
-├── frontend/           # React (Dashboard & Visualizer)
-├── terraform/          # Modular IaC Templates
-│   ├── modules/        # AWS Application Modules
-│   ├── environments/   # Dynamic templates
-│   └── workspaces/     # Deployment state persistence
-├── docker-compose.yml  # Stack orchestration
-└── README.md           # This document
+├── backend/                        # Spring Boot (API & Decision Engine)
+│   └── src/main/java/com/awsplanner/
+│       ├── auth/                   # Authentication (JWT login)
+│       ├── recommendation/         # Decision engine, cost & scoring
+│       ├── deployment/             # Terraform lifecycle management
+│       ├── config/                 # Security, CORS, exception handling
+│       └── web/                    # SPA route forwarding
+├── frontend/                       # React (Dashboard & Visualizer)
+├── terraform/                      # Modular IaC Templates
+│   ├── modules/                    # AWS Application Modules
+│   ├── environments/               # Dynamic templates
+│   └── workspaces/                 # Deployment state persistence
+├── docker-compose.yml              # Stack orchestration
+└── README.md                       # This document
 ```
+
+---
+
+## 🔀 Branching Strategy (DevSecOps)
+
+To ensure code stability and smooth integration with our DevSecOps Jenkins Pipeline, we follow a structured branching model:
+
+- **`main`**: Production code only. Triggers production deployments. Never commit directly to this branch.
+- **`dev`**: Integration branch. All features are merged here for comprehensive security testing (SCA, SAST, Checkov, Trivy) via the Jenkins CI pipeline.
+- **`feature/*`**: Short-lived branches created from `dev`. Used for active development and merged back into `dev` via Pull Requests.
 
 ---
 

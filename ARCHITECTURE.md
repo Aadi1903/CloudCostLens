@@ -40,6 +40,61 @@ flowchart TD
 
 ---
 
+## 1.1 Backend Module Architecture (Modular Monolith)
+
+The Spring Boot backend follows a **domain-aligned modular monolith** structure. Each module encapsulates its own controllers, services, models, and repositories within a single deployable unit.
+
+```mermaid
+flowchart LR
+    subgraph "com.awsplanner"
+        direction TB
+        
+        subgraph auth["auth"]
+            AuthController["AuthController"]
+            LoginRequest["LoginRequest"]
+        end
+        
+        subgraph recommendation["recommendation"]
+            RecController["RecommendationController"]
+            FeedbackController["FeedbackController"]
+            DecisionEngine["DecisionEngineService"]
+            CostEstimation["CostEstimationService"]
+            RequirementSvc["RequirementService"]
+            KnowledgeBase["ServiceKnowledgeBase"]
+            Models1["Models: AwsService, Recommendation,\nUserRequirement, ServiceScore, etc."]
+        end
+        
+        subgraph deployment["deployment"]
+            DeployController["DeploymentController"]
+            TerraformSvc["TerraformService"]
+            DeployRepo["DeploymentRepository"]
+            DeployModel["Deployment, StringListConverter"]
+        end
+        
+        subgraph config["config"]
+            Security["SecurityConfig, JwtUtil,\nJwtRequestFilter, CorsConfig,\nDebugFilter, GlobalExceptionHandler"]
+        end
+        
+        subgraph web["web"]
+            FrontendCtrl["FrontendController"]
+        end
+    end
+
+    recommendation -.->|health check| deployment
+    auth -.->|JWT validation| config
+```
+
+### Module Boundaries:
+| Module | Responsibility | Cross-module Dependencies |
+|---|---|---|
+| `auth` | JWT login, token management | Uses `config.JwtUtil` |
+| `recommendation` | Architecture scoring, cost estimation, feedback | Uses `deployment.TerraformService` (health check only) |
+| `deployment` | Terraform lifecycle (init → plan → apply → destroy) | Self-contained |
+| `config` | Security filters, CORS, exception handling | Framework-level, no domain imports |
+| `web` | SPA route forwarding | None |
+
+---
+
 ## 2. Cloud Provisioning Architecture (Modular Infrastructure as Code)
 
 When a deployment is triggered, CloudCostLens generates variables and applies one of its highly-optimized **Terraform Modules**.

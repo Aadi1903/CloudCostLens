@@ -1,9 +1,9 @@
 services:
-  backend:
+  app:
     build:
-      context: ./backend
+      context: .
       dockerfile: Dockerfile
-    container_name: ccl-backend
+    container_name: ccl-app
     ports:
       - "8080:8080"
     # Mount terraform folder so the app can use templates and persist state
@@ -22,18 +22,20 @@ services:
       - SPRING_DATASOURCE_PASSWORD=${SUPABASE_DB_PASSWORD}
     restart: always
 
-  frontend:
+  jenkins:
     build:
-      context: ./frontend
-      dockerfile: Dockerfile
-    container_name: ccl-frontend
+      context: .
+      dockerfile: Jenkins.Dockerfile
+    container_name: ccl-jenkins
+    privileged: true
+    user: root
     ports:
-      - "5173:5173"
-    depends_on:
-      - backend
-    # Vite environment variables must start with VITE_
-    environment:
-      - VITE_API_URL=http://localhost:8080/api
+      - "8081:8080"
+      - "50000:50000"
+    volumes:
+      - ./jenkins_home:/var/jenkins_home
+      - .:/var/jenkins_home/project
+      - /var/run/docker.sock:/var/run/docker.sock
     restart: always
 
 networks:
