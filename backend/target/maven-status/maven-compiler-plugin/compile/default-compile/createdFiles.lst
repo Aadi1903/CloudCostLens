@@ -1,5 +1,0 @@
-com\awsplanner\config\JwtUtil.class
-com\awsplanner\config\JwtRequestFilter.class
-com\awsplanner\AwsPlannerApplication.class
-com\awsplanner\config\CorsConfig.class
-com\awsplanner\config\SecurityConfig.class
