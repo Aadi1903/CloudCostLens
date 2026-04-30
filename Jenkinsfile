@@ -7,6 +7,8 @@ pipeline {
         AWS_ACCESS_KEY_ID     = credentials('AWS_ACCESS_KEY_ID')
         AWS_SECRET_ACCESS_KEY = credentials('AWS_SECRET_ACCESS_KEY')
         AWS_DEFAULT_REGION    = 'us-east-1'
+        // Your actual Docker Hub username and repository
+        DOCKER_IMAGE_NAME     = 'aadi02/cloudcostlens-platform'
     }
 
     stages {
@@ -82,8 +84,20 @@ pipeline {
 
         stage('Docker — Build Image') {
             steps {
-                sh 'docker build -t cloudcostlens-platform:latest -t cloudcostlens-platform:${BUILD_NUMBER} .'
-                echo "✅ Docker image built: cloudcostlens-platform:${BUILD_NUMBER}"
+                sh 'docker build -t ${DOCKER_IMAGE_NAME}:latest -t ${DOCKER_IMAGE_NAME}:${BUILD_NUMBER} .'
+                echo "✅ Docker image built: ${DOCKER_IMAGE_NAME}:${BUILD_NUMBER}"
+            }
+        }
+
+        stage('Docker — Push Image to Registry') {
+            steps {
+                // Ensure you have added your Docker Hub credentials in Jenkins with ID 'docker-hub-credentials'
+                withCredentials([usernamePassword(credentialsId: 'docker-hub-credentials', passwordVariable: 'DOCKER_PASS', usernameVariable: 'DOCKER_USER')]) {
+                    sh 'echo "$DOCKER_PASS" | docker login -u "$DOCKER_USER" --password-stdin'
+                    sh 'docker push ${DOCKER_IMAGE_NAME}:latest'
+                    sh 'docker push ${DOCKER_IMAGE_NAME}:${BUILD_NUMBER}'
+                }
+                echo "✅ Docker image pushed to Docker Hub"
             }
         }
 
@@ -99,8 +113,12 @@ pipeline {
                 branch 'main'
             }
             steps {
-                echo "🚀 Deploying to Production environment (main branch)..."
-                // Add deployment script here
+                echo "🚀 Deploying to Production Kubernetes Cluster (main branch)..."
+                // Applies the base Kubernetes configuration (namespaces, configmaps, services)
+                sh 'kubectl apply -f k8s/'
+                // Dynamically sets the new image version built in this pipeline run
+                sh 'kubectl set image deployment/ccl-app-deployment ccl-app=${DOCKER_IMAGE_NAME}:${BUILD_NUMBER} -n cloudcostlens'
+                echo "✅ Deployment rolled out to Kubernetes!"
             }
         }
         

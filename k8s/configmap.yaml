@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: ccl-config
+  namespace: cloudcostlens
+data:
+  SERVER_PORT: "8080"
+  JAVA_TOOL_OPTIONS: "-Djava.net.preferIPv4Stack=true"
+  SPRING_DATASOURCE_URL: "jdbc:postgresql://aws-1-ap-northeast-2.pooler.supabase.com:6543/postgres?prepareThreshold=0&ssl=true&sslmode=require"
+  SPRING_DATASOURCE_USERNAME: "postgres.mdcrhrvhxfbkseuozkea"
+  TERRAFORM_WORKSPACE_BASE: "/app/terraform/workspaces"
+  TERRAFORM_ENVIRONMENT_PATH: "/app/terraform/environments/dynamic"

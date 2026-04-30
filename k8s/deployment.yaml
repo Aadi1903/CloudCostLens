@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ccl-app-deployment
+  namespace: cloudcostlens
+  labels:
+    app: cloudcostlens
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: cloudcostlens
+  template:
+    metadata:
+      labels:
+        app: cloudcostlens
+    spec:
+      containers:
+        - name: ccl-app
+          # This image will be built and pushed by Jenkins to Docker Hub
+          image: aadi02/cloudcostlens-platform:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8080
+          envFrom:
+            - configMapRef:
+                name: ccl-config
+            - secretRef:
+                name: ccl-secret
+          volumeMounts:
+            - name: terraform-storage
+              mountPath: /app/terraform
+      volumes:
+        - name: terraform-storage
+          persistentVolumeClaim:
+            claimName: terraform-data-pvc

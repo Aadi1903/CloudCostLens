@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: ccl-app-service
+  namespace: cloudcostlens
+spec:
+  selector:
+    app: cloudcostlens
+  # Using NodePort to easily access it on Minikube/Local environments
+  # In a cloud environment (AWS EKS), this is typically changed to LoadBalancer
+  type: NodePort
+  ports:
+    - protocol: TCP
+      port: 8080
+      targetPort: 8080
+      nodePort: 30080
