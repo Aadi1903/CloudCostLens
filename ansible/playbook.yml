@@ -1,0 +1,13 @@
+---
+- name: Setup CloudCostLens Server
+  hosts: webservers
+  become: yes
+  roles:
+    - common
+    - docker
+    - security
+
+- name: Setup Local Environment
+  hosts: local
+  roles:
+    - common

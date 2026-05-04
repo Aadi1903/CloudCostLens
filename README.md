@@ -1,59 +1,72 @@
-# ☀️ CloudCostLens: Intelligent AWS Architecture & Provisioning
+# ☁️ CloudCostLens
 
-**Streamlining Cloud Infrastructure with Decision Intelligence and Automated Provisioning.**
+**An Intelligent AWS Architecture Advisor with Automated Provisioning, Built on a Full DevSecOps Pipeline.**
 
----
-
-## 🎯 Overview
-CloudCostLens is a professional-grade **DevSecOps Platform** designed to bridge the gap between architectural design and real-world provisioning. It assists architects in making data-driven decisions by recommending optimized AWS architectures based on traffic, budget, and operational constraints.
-
-Unlike static calculators, CloudCostLens provides **Infrastructure as Code (IaC) Automation**, allowing users to provision the recommended architecture directly onto AWS with a single click, managed by a robust Terraform automation engine.
+CloudCostLens isn't just another cloud calculator. It's a decision-support platform that recommends optimized AWS architectures based on your traffic, budget, and operational needs — and then provisions them for you with a single click. The entire project is wrapped in a production-grade DevSecOps lifecycle, from automated security scanning to real-time observability.
 
 ---
 
-## ✨ Key Features
+## 🎯 What This Project Does
 
-### 🧠 Intelligent Recommendation Engine
-- **Rule-Based Decision Logic**: Transparent, explainable architecture scoring based on cost, scalability, and operational effort.
-- **Budget Guardrails**: Proactive validation to ensure designs stay within your financial limits (including a $1 minimum safety check).
-- **Service Optimization**: Automatically selects between S3 static hosting, EC2 instances, or Scalable ASG/ALB clusters based on traffic requirements.
+At its core, CloudCostLens solves a common problem: **choosing the right AWS architecture is hard.** There are dozens of services, pricing models, and scaling strategies. This platform takes your requirements as input and outputs a scored, cost-estimated architecture recommendation. If you approve it, the platform will provision the infrastructure on AWS using Terraform — no manual console clicks required.
 
-### 🏗️ Automated Provisioning (IaC)
-- **Terraform Integration**: Real-time generation and execution of Terraform configurations.
-- **Process Management**: Native support for `Init → Plan → Apply → Destroy` lifecycles with a manual **Stop/Cancel** feature.
-- **Resource Inspector**: Deep-visibility into provisioned AWS resources (IDs, IPs, and ARNs) immediately post-deployment.
+### Key Capabilities
 
-### 🛡️ Safety & Reliability
-- **Auto-Destroy Utility**: Intelligent 2-hour scheduled destruction of resources to prevent runaway cloud costs.
-- **Pre-flight Checks**: Automated verification of Terraform installations and AWS credentials before provisioning starts.
-- **JWT Security**: Role-based access control ensuring only authorized Admins can trigger cloud mutations.
+| Feature | Description |
+|---|---|
+| **Intelligent Recommendations** | A rule-based decision engine scores AWS services based on cost, scalability, and operational effort. |
+| **One-Click Provisioning** | Generates and executes Terraform configurations in real-time (`Init → Plan → Apply → Destroy`). |
+| **Auto-Destroy Safety Net** | A background scheduler automatically tears down provisioned resources after 2 hours to prevent surprise bills. |
+| **Budget Guardrails** | Validates designs against your financial limits before any infrastructure is created. |
+| **Resource Inspector** | Post-deployment visibility into provisioned AWS resources (IDs, IPs, ARNs). |
+| **JWT Authentication** | Role-based access control ensuring only authorized users can trigger cloud changes. |
 
 ---
 
-## 🏗️ Architecture & Stack
-The application is built using a modern **Reactive Full-Stack Architecture**:
+## 🏗️ Technology Stack
 
-- **Frontend**: React 18, Vite, CSS3 (Modular Design System).
-- **Backend**: Spring Boot 3.2, Java 21, Maven.
-- **Database**: **Supabase (PostgreSQL)** (Production-grade, cloud-hosted persistence).
-- **Automation**: Terraform CLI (Process management via Java `ProcessBuilder`).
-- **Orchestration**: Docker & Docker Compose.
-- **Documentation**: OpenAPI 3 / Swagger UI.
+This project is intentionally built with a diverse, industry-standard stack to demonstrate real-world engineering practices.
+
+### Application Layer
+| Component | Technology | Purpose |
+|---|---|---|
+| Frontend | React 18, Vite, CSS3 | Interactive dashboard and pipeline visualizer |
+| Backend | Spring Boot 3.2, Java 21, Maven | REST API, decision engine, and Terraform orchestrator |
+| Database | Supabase (PostgreSQL) | Cloud-hosted persistence for auth and deployment history |
+| IaC Engine | Terraform CLI | Automated cloud provisioning via `ProcessBuilder` |
+
+### DevSecOps & Infrastructure Layer
+| Component | Technology | Purpose |
+|---|---|---|
+| CI/CD | Jenkins (Dockerized) | Automated build, test, scan, and deploy pipeline |
+| Container Registry | Docker Hub | Versioned image storage and distribution |
+| Orchestration | Kubernetes (Minikube) | Container orchestration with self-healing and scaling |
+| Monitoring | Prometheus + Grafana | Real-time metrics collection and visualization |
+| Config Management | Ansible | Automated server provisioning and security hardening |
+
+### Security Scanning (Integrated in Pipeline)
+| Tool | Type | What It Checks |
+|---|---|---|
+| Semgrep | SAST | Source code for security anti-patterns |
+| OWASP Dependency-Check | SCA (Backend) | Java dependencies for known CVEs |
+| npm audit | SCA (Frontend) | Node.js packages for known vulnerabilities |
+| Checkov | IaC Scan | Terraform files for misconfigurations |
+| Trivy | Container Scan | Docker images for OS and library vulnerabilities |
+| OWASP ZAP | DAST | Running application for injection and XSS flaws |
 
 ---
 
 ## 🚀 Getting Started
 
-### 📋 Prerequisites
-- **Docker & Docker Compose** (Recommended)
-- **OR** Local Installation:
-    - **Java 17+** (Adoptium recommended)
-    - **Node.js 18+**
-    - **Terraform 1.5+** (Must be in your system PATH)
-- **AWS Credentials**: IAM User with programmatic access keys.
+### Prerequisites
+- **Docker Desktop** (Required — runs Jenkins, Minikube, and the app containers)
+- **kubectl** (For Kubernetes management)
+- **Minikube** (Local Kubernetes cluster)
+- **AWS Credentials**: IAM User with programmatic access keys
 
-### ⚙️ Configuration (.env)
-Create a `.env` file in the root directory (or update the provided one):
+### Configuration
+
+Create a `.env` file in the project root:
 ```env
 # AWS Credentials
 AWS_ACCESS_KEY_ID=your_access_key
@@ -68,59 +81,157 @@ ADMIN_PASSWORD=admin123
 JWT_SECRET=your_complex_secret_here
 ```
 
-### ⚡ Docker Quick Start (Recommended)
-The easiest way to run the entire platform is using Docker Compose. This automatically installs Terraform inside the container for you.
+### Quick Start
 
-1. **Build & Start**:
-   ```bash
-   docker compose up --build -d
-   ```
-2. **Access**:
-   - **Frontend Dashboard**: `http://localhost:5173`
-   - **Backend API**: `http://localhost:8080`
-   - **API Docs**: `http://localhost:8080/swagger-ui/index.html`
+**1. Start the Application Stack (Docker Compose):**
+```bash
+docker compose up --build -d
+```
+- **Frontend**: `http://localhost:5173`
+- **Backend API**: `http://localhost:8080`
+- **Swagger Docs**: `http://localhost:8080/swagger-ui/index.html`
 
-### ⚡ Local Start (Alternative)
-1. **Start Backend**: Double-click `start-backend.bat`.
-2. **Start Frontend**: Double-click `start-frontend.bat`.
+**2. Start the Kubernetes Environment:**
+```bash
+minikube start
+kubectl apply -f k8s/
+```
+
+**3. Start Jenkins CI/CD:**
+```bash
+docker-compose up -d
+```
+- **Jenkins**: `http://localhost:8082`
+
+**4. Access Monitoring Dashboards:**
+```bash
+minikube service grafana-service -n cloudcostlens --url
+minikube service prometheus-service -n cloudcostlens --url
+```
+- **Grafana Login**: `admin / admin`
+- Navigate to **Dashboards → CloudCostLens → JVM Monitoring**
 
 ---
 
 ## 📂 Project Structure
+
 ```
 CloudCostLens/
-├── backend/                        # Spring Boot (API & Decision Engine)
+│
+├── backend/                          # Spring Boot Application
 │   └── src/main/java/com/awsplanner/
-│       ├── auth/                   # Authentication (JWT login)
-│       ├── recommendation/         # Decision engine, cost & scoring
-│       ├── deployment/             # Terraform lifecycle management
-│       ├── config/                 # Security, CORS, exception handling
-│       └── web/                    # SPA route forwarding
-├── frontend/                       # React (Dashboard & Visualizer)
-├── terraform/                      # Modular IaC Templates
-│   ├── modules/                    # AWS Application Modules
-│   ├── environments/               # Dynamic templates
-│   └── workspaces/                 # Deployment state persistence
-├── docker-compose.yml              # Stack orchestration
-└── README.md                       # This document
+│       ├── auth/                     # JWT authentication & login
+│       ├── recommendation/           # Decision engine, cost estimation, scoring
+│       ├── deployment/               # Terraform lifecycle management
+│       ├── config/                   # Security filters, CORS, JWT utilities
+│       └── web/                      # SPA route forwarding
+│
+├── frontend/                         # React + Vite Dashboard
+│
+├── terraform/                        # Infrastructure as Code
+│   ├── modules/
+│   │   ├── scalable_app/             # ALB + ASG (high-traffic)
+│   │   ├── web_app/                  # Standalone EC2 (low-traffic)
+│   │   └── storage_app/             # S3 bucket (static assets)
+│   └── environments/                 # Dynamic variable templates
+│
+├── k8s/                              # Kubernetes Manifests
+│   ├── deployment.yaml               # Application deployment
+│   ├── service.yaml                  # ClusterIP/NodePort services
+│   ├── configmap.yaml                # Environment configuration
+│   ├── secret.yaml                   # Sensitive credentials
+│   ├── prometheus.yaml               # Prometheus server + scrape config
+│   └── grafana.yaml                  # Grafana + auto-provisioned dashboards
+│
+├── ansible/                          # Configuration Management
+│   ├── inventory.ini                 # Target server definitions
+│   ├── playbook.yml                  # Main orchestration playbook
+│   └── roles/
+│       ├── common/                   # OS updates, timezone, basic tools
+│       ├── docker/                   # Docker & Docker Compose installation
+│       └── security/                 # UFW firewall hardening
+│
+├── Jenkinsfile                       # Full CI/CD pipeline definition
+├── Dockerfile                        # Multi-stage application image
+├── Jenkins.Dockerfile                # Custom Jenkins agent with tools
+├── docker-compose.yml                # Local development orchestration
+└── ARCHITECTURE.md                   # Detailed system design document
 ```
 
 ---
 
-## 🔀 Branching Strategy (DevSecOps)
+## 🔄 CI/CD Pipeline
 
-To ensure code stability and smooth integration with our DevSecOps Jenkins Pipeline, we follow a structured branching model:
+The Jenkins pipeline automates the entire software delivery lifecycle. Every commit triggers the following stages:
 
-- **`main`**: Production code only. Triggers production deployments. Never commit directly to this branch.
-- **`dev`**: Integration branch. All features are merged here for comprehensive security testing (SCA, SAST, Checkov, Trivy) via the Jenkins CI pipeline.
-- **`feature/*`**: Short-lived branches created from `dev`. Used for active development and merged back into `dev` via Pull Requests.
+```
+Checkout → SAST (Semgrep) → Build Backend → SCA (Dependency-Check) →
+Build Frontend → SCA (npm audit) → Terraform Validate → IaC Scan (Checkov) →
+Docker Build → Push to Registry → Container Scan (Trivy) →
+Deploy to Kubernetes → DAST (OWASP ZAP)
+```
+
+### Branching Strategy
+| Branch | Purpose | Pipeline Behavior |
+|---|---|---|
+| `main` | Production-ready code | Full pipeline + Kubernetes deployment |
+| `dev` | Integration testing | Full pipeline + DAST scanning |
+| `feature/*` | Active development | Created from `dev`, merged via PR |
 
 ---
 
-## 📝 Project Identity
-- **Examiner Note**: This project uses **Supabase (PostgreSQL)** as its primary database for cloud-persistent history.
-- **Infrastructure**: The platform uses a **Dockerized Terraform engine** to ensure environment consistency across all systems.
-- **Cost Warning**: This application provisions **Real AWS Resources**. Always ensure your `AWS_REGION` is set correctly and the "Auto-Destroy" task is allowed to run to completion.
+## 📊 Monitoring & Observability
+
+The platform uses a **Prometheus → Grafana** observability stack deployed within the Kubernetes cluster.
+
+### What We Monitor
+| Metric Category | Examples |
+|---|---|
+| **JVM Health** | Heap/Non-heap memory, garbage collection, loaded classes |
+| **Application Performance** | HTTP request rate, error rate (4xx/5xx), response times |
+| **System Resources** | CPU usage (process vs. system), thread states |
+| **Database Connections** | HikariCP pool (active, idle, pending connections) |
+
+### How It Works
+1. **Spring Boot Actuator** exposes metrics at `/actuator/prometheus` using Micrometer.
+2. **Prometheus** scrapes these metrics every 15 seconds from within the cluster.
+3. **Grafana** visualizes them on an auto-provisioned dashboard (no manual setup needed).
 
 ---
+
+## 🔧 Infrastructure Automation (Ansible)
+
+Ansible automates the setup of production servers. Instead of manually installing Docker, configuring firewalls, and setting up environments on every new server, a single command handles everything:
+
+```bash
+ansible-playbook -i ansible/inventory.ini ansible/playbook.yml
+```
+
+### Roles
+| Role | What It Does |
+|---|---|
+| `common` | Updates packages, installs essential tools (git, curl, htop), sets timezone |
+| `docker` | Installs Docker Engine and Docker Compose from official repositories |
+| `security` | Configures UFW firewall — allows only SSH, HTTP, HTTPS, and Grafana |
+
+---
+
+## 🛡️ Security Considerations
+
+- **Actuator endpoints** are whitelisted in `SecurityConfig.java` for Prometheus scraping but are not exposed externally.
+- **JWT tokens** are required for all mutation operations (deployments, configuration changes).
+- **Terraform state** is stored locally in persistent volumes — not committed to version control.
+- **Docker images** are scanned for vulnerabilities before being pushed to the registry.
+- **.env files** containing credentials are excluded from Git via `.gitignore`.
+
+---
+
+## 📝 Notes
+
+- **Database**: This project uses **Supabase (PostgreSQL)** as its primary database for cloud-persistent history.
+- **Cost Warning**: This application provisions **real AWS resources**. Always ensure your `AWS_REGION` is set correctly and allow the Auto-Destroy scheduler to run to completion.
+- **Local Development**: Ensure Docker Desktop is running before starting Minikube or any containerized services.
+
+---
+
 **Disclaimer**: CloudCostLens is not affiliated with Amazon Web Services. All AWS service names and trademarks are the property of Amazon.com, Inc.

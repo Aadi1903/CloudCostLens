@@ -1,0 +1,28 @@
+---
+- name: Allow SSH through UFW
+  ufw:
+    rule: allow
+    name: OpenSSH
+
+- name: Allow HTTP (80)
+  ufw:
+    rule: allow
+    port: '80'
+    proto: tcp
+
+- name: Allow HTTPS (443)
+  ufw:
+    rule: allow
+    port: '443'
+    proto: tcp
+
+- name: Allow Grafana (30030)
+  ufw:
+    rule: allow
+    port: '30030'
+    proto: tcp
+
+- name: Enable UFW
+  ufw:
+    state: enabled
+    policy: deny

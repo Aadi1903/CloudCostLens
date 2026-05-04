@@ -1,0 +1,21 @@
+---
+- name: Update apt cache and upgrade all packages
+  apt:
+    update_cache: yes
+    upgrade: dist
+  when: ansible_os_family == "Debian"
+
+- name: Install common packages
+  apt:
+    name:
+      - curl
+      - git
+      - vim
+      - ufw
+      - htop
+    state: present
+  when: ansible_os_family == "Debian"
+
+- name: Ensure timezone is UTC
+  timezone:
+    name: UTC
