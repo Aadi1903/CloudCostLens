@@ -12,6 +12,148 @@ data:
       access: proxy
       url: http://prometheus-service.cloudcostlens.svc.cluster.local:9090
       isDefault: true
+      uid: prometheus
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: grafana-dashboard-provider
+  namespace: cloudcostlens
+data:
+  dashboards.yaml: |
+    apiVersion: 1
+    providers:
+    - name: 'cloudcostlens'
+      orgId: 1
+      folder: 'CloudCostLens'
+      type: file
+      disableDeletion: false
+      editable: true
+      updateIntervalSeconds: 10
+      options:
+        path: /etc/grafana/dashboards
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: grafana-dashboard-json
+  namespace: cloudcostlens
+data:
+  cloudcostlens.json: |
+    {
+      "title": "CloudCostLens — JVM Monitoring",
+      "uid": "cloudcostlens-jvm",
+      "timezone": "browser",
+      "schemaVersion": 36,
+      "version": 1,
+      "refresh": "30s",
+      "time": { "from": "now-1h", "to": "now" },
+      "templating": { "list": [] },
+      "panels": [
+        {
+          "id": 1, "gridPos": {"h": 4, "w": 6, "x": 0, "y": 0},
+          "title": "Uptime", "type": "stat",
+          "datasource": {"type": "prometheus", "uid": "prometheus"},
+          "fieldConfig": {"defaults": {"unit": "s", "color": {"mode": "thresholds"}, "thresholds": {"steps": [{"color": "green", "value": null}]}}},
+          "options": {"reduceOptions": {"calcs": ["lastNotNull"]}, "orientation": "auto", "textMode": "auto", "colorMode": "background"},
+          "targets": [{"expr": "process_uptime_seconds{application=\"cloudcostlens-backend\"}", "legendFormat": "Uptime", "refId": "A"}]
+        },
+        {
+          "id": 2, "gridPos": {"h": 4, "w": 6, "x": 6, "y": 0},
+          "title": "Live Threads", "type": "stat",
+          "datasource": {"type": "prometheus", "uid": "prometheus"},
+          "fieldConfig": {"defaults": {"unit": "short", "color": {"mode": "thresholds"}, "thresholds": {"steps": [{"color": "blue", "value": null}]}}},
+          "options": {"reduceOptions": {"calcs": ["lastNotNull"]}, "orientation": "auto", "textMode": "auto", "colorMode": "background"},
+          "targets": [{"expr": "jvm_threads_live_threads{application=\"cloudcostlens-backend\"}", "legendFormat": "Threads", "refId": "A"}]
+        },
+        {
+          "id": 3, "gridPos": {"h": 4, "w": 6, "x": 12, "y": 0},
+          "title": "CPU Usage (%)", "type": "stat",
+          "datasource": {"type": "prometheus", "uid": "prometheus"},
+          "fieldConfig": {"defaults": {"unit": "percentunit", "color": {"mode": "thresholds"}, "thresholds": {"steps": [{"color": "green", "value": null}, {"color": "yellow", "value": 0.5}, {"color": "red", "value": 0.8}]}}},
+          "options": {"reduceOptions": {"calcs": ["lastNotNull"]}, "orientation": "auto", "textMode": "auto", "colorMode": "background"},
+          "targets": [{"expr": "process_cpu_usage{application=\"cloudcostlens-backend\"}", "legendFormat": "CPU", "refId": "A"}]
+        },
+        {
+          "id": 4, "gridPos": {"h": 4, "w": 6, "x": 18, "y": 0},
+          "title": "Loaded Classes", "type": "stat",
+          "datasource": {"type": "prometheus", "uid": "prometheus"},
+          "fieldConfig": {"defaults": {"unit": "short", "color": {"mode": "thresholds"}, "thresholds": {"steps": [{"color": "purple", "value": null}]}}},
+          "options": {"reduceOptions": {"calcs": ["lastNotNull"]}, "orientation": "auto", "textMode": "auto", "colorMode": "background"},
+          "targets": [{"expr": "jvm_classes_loaded_classes{application=\"cloudcostlens-backend\"}", "legendFormat": "Classes", "refId": "A"}]
+        },
+        {
+          "id": 5, "gridPos": {"h": 8, "w": 12, "x": 0, "y": 4},
+          "title": "JVM Heap Memory", "type": "timeseries",
+          "datasource": {"type": "prometheus", "uid": "prometheus"},
+          "fieldConfig": {"defaults": {"unit": "bytes", "custom": {"lineWidth": 2, "fillOpacity": 10}}},
+          "options": {"tooltip": {"mode": "multi"}},
+          "targets": [
+            {"expr": "jvm_memory_used_bytes{application=\"cloudcostlens-backend\", area=\"heap\"}", "legendFormat": "Used", "refId": "A"},
+            {"expr": "jvm_memory_committed_bytes{application=\"cloudcostlens-backend\", area=\"heap\"}", "legendFormat": "Committed", "refId": "B"},
+            {"expr": "jvm_memory_max_bytes{application=\"cloudcostlens-backend\", area=\"heap\"}", "legendFormat": "Max", "refId": "C"}
+          ]
+        },
+        {
+          "id": 6, "gridPos": {"h": 8, "w": 12, "x": 12, "y": 4},
+          "title": "JVM Non-Heap Memory", "type": "timeseries",
+          "datasource": {"type": "prometheus", "uid": "prometheus"},
+          "fieldConfig": {"defaults": {"unit": "bytes", "custom": {"lineWidth": 2, "fillOpacity": 10}}},
+          "options": {"tooltip": {"mode": "multi"}},
+          "targets": [
+            {"expr": "jvm_memory_used_bytes{application=\"cloudcostlens-backend\", area=\"nonheap\"}", "legendFormat": "Used", "refId": "A"},
+            {"expr": "jvm_memory_committed_bytes{application=\"cloudcostlens-backend\", area=\"nonheap\"}", "legendFormat": "Committed", "refId": "B"}
+          ]
+        },
+        {
+          "id": 7, "gridPos": {"h": 8, "w": 12, "x": 0, "y": 12},
+          "title": "HTTP Request Rate (req/s)", "type": "timeseries",
+          "datasource": {"type": "prometheus", "uid": "prometheus"},
+          "fieldConfig": {"defaults": {"unit": "reqps", "custom": {"lineWidth": 2, "fillOpacity": 10}}},
+          "options": {"tooltip": {"mode": "multi"}},
+          "targets": [
+            {"expr": "rate(http_server_requests_seconds_count{application=\"cloudcostlens-backend\", status=\"200\"}[1m])", "legendFormat": "Success (2xx)", "refId": "A"},
+            {"expr": "rate(http_server_requests_seconds_count{application=\"cloudcostlens-backend\", status=~\"4..|5..\"}[1m])", "legendFormat": "Errors (4xx/5xx)", "refId": "B"}
+          ]
+        },
+        {
+          "id": 8, "gridPos": {"h": 8, "w": 12, "x": 12, "y": 12},
+          "title": "CPU Usage Over Time", "type": "timeseries",
+          "datasource": {"type": "prometheus", "uid": "prometheus"},
+          "fieldConfig": {"defaults": {"unit": "percentunit", "min": 0, "max": 1, "custom": {"lineWidth": 2, "fillOpacity": 10}}},
+          "options": {"tooltip": {"mode": "multi"}},
+          "targets": [
+            {"expr": "process_cpu_usage{application=\"cloudcostlens-backend\"}", "legendFormat": "Process CPU", "refId": "A"},
+            {"expr": "system_cpu_usage{application=\"cloudcostlens-backend\"}", "legendFormat": "System CPU", "refId": "B"}
+          ]
+        },
+        {
+          "id": 9, "gridPos": {"h": 8, "w": 12, "x": 0, "y": 20},
+          "title": "DB Connection Pool (HikariCP)", "type": "timeseries",
+          "datasource": {"type": "prometheus", "uid": "prometheus"},
+          "fieldConfig": {"defaults": {"unit": "short", "custom": {"lineWidth": 2, "fillOpacity": 10}}},
+          "options": {"tooltip": {"mode": "multi"}},
+          "targets": [
+            {"expr": "hikaricp_connections_active{application=\"cloudcostlens-backend\"}", "legendFormat": "Active", "refId": "A"},
+            {"expr": "hikaricp_connections_idle{application=\"cloudcostlens-backend\"}", "legendFormat": "Idle", "refId": "B"},
+            {"expr": "hikaricp_connections_pending{application=\"cloudcostlens-backend\"}", "legendFormat": "Pending", "refId": "C"}
+          ]
+        },
+        {
+          "id": 10, "gridPos": {"h": 8, "w": 12, "x": 12, "y": 20},
+          "title": "JVM Thread States", "type": "timeseries",
+          "datasource": {"type": "prometheus", "uid": "prometheus"},
+          "fieldConfig": {"defaults": {"unit": "short", "custom": {"lineWidth": 2, "fillOpacity": 10}}},
+          "options": {"tooltip": {"mode": "multi"}},
+          "targets": [
+            {"expr": "jvm_threads_states_threads{application=\"cloudcostlens-backend\", state=\"runnable\"}", "legendFormat": "Runnable", "refId": "A"},
+            {"expr": "jvm_threads_states_threads{application=\"cloudcostlens-backend\", state=\"waiting\"}", "legendFormat": "Waiting", "refId": "B"},
+            {"expr": "jvm_threads_states_threads{application=\"cloudcostlens-backend\", state=\"timed-waiting\"}", "legendFormat": "Timed Waiting", "refId": "C"},
+            {"expr": "jvm_threads_states_threads{application=\"cloudcostlens-backend\", state=\"blocked\"}", "legendFormat": "Blocked", "refId": "D"}
+          ]
+        }
+      ]
+    }
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
@@ -42,25 +184,32 @@ spec:
       labels:
         app: grafana
     spec:
-      # Fix permissions for PVC so grafana user can write to it
       securityContext:
         fsGroup: 472
-        supplementalGroups:
-          - 0
       containers:
         - name: grafana
-          image: grafana/grafana:latest
+          image: grafana/grafana:10.4.2
           ports:
             - containerPort: 3000
           volumeMounts:
             - name: datasource-volume
               mountPath: /etc/grafana/provisioning/datasources
+            - name: dashboard-provider-volume
+              mountPath: /etc/grafana/provisioning/dashboards
+            - name: dashboard-json-volume
+              mountPath: /etc/grafana/dashboards
             - name: data-volume
               mountPath: /var/lib/grafana
       volumes:
         - name: datasource-volume
           configMap:
             name: grafana-datasource-config
+        - name: dashboard-provider-volume
+          configMap:
+            name: grafana-dashboard-provider
+        - name: dashboard-json-volume
+          configMap:
+            name: grafana-dashboard-json
         - name: data-volume
           persistentVolumeClaim:
             claimName: grafana-data-pvc
