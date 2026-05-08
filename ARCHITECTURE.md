@@ -212,4 +212,42 @@ flowchart TD
     Inventory["inventory.ini\n(Target Servers)"] --> Playbook
 ```
 
-This ensures that any new server can be prepared for deployment in a single command, eliminating manual configuration and reducing the risk of environment drift.
+---
+
+## 7. Performance Engineering & Load Testing
+
+To ensure the platform can handle real-world traffic, we perform automated load testing using **k6**. The testing focuses on the backend's ability to handle concurrent requests and identify infrastructure breaking points.
+
+### Load Testing Setup
+- **Tool**: [k6](https://k6.io/)
+- **Target Environment**: Render (Production-like)
+- **Scenarios**: Baseline, Concurrent Load, and Ramp-Up Stress tests.
+
+### Test Results
+
+#### A. Baseline Test (Single User)
+- **Configuration**: 1 VU, Single Iteration.
+- **Outcome**: ~470ms average response time. Confirms basic connectivity and low-latency response under zero load.
+
+#### B. Concurrent Load Test (Standard Traffic)
+- **Configuration**: 1,000 VUs for 1 minute.
+- **Throughput**: **~1,216 requests/second**.
+- **Performance**: Average response time ~791ms.
+- **Success Rate**: ~98.6% (minor connection refusals at peak).
+- **Insight**: The backend handles significant concurrent traffic stably without a dedicated load balancer.
+
+#### C. Ramp-Up Stress Test (Extreme Traffic)
+- **Configuration**: Gradual increase (500 -> 1,000 -> 3,000 VUs).
+- **Breaking Point**: System becomes unstable at ~3,000 VUs.
+- **Observations**: Latency spikes to 60s, 100% failure rate due to request timeouts and infrastructure saturation.
+
+### Bottleneck Analysis
+Testing identified the following constraints:
+1. **Infrastructure Limits**: Render free/starter tier CPU/Memory saturation.
+2. **Horizontal Scaling**: Single backend instance reached its connection limit.
+3. **Caching**: Absence of a Redis/Memcached layer leads to repetitive database queries.
+
+### Scalability Insights
+- The current architecture is stable for **500–1,000 concurrent users**.
+- Future optimizations will include enabling **Kubernetes Horizontal Pod Autoscaling (HPA)** and integrating a **Redis caching layer** for frequently accessed recommendation data.
+

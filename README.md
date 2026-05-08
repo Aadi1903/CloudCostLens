@@ -216,6 +216,22 @@ ansible-playbook -i ansible/inventory.ini ansible/playbook.yml
 
 ---
 
+## ⚡ Performance & Scalability
+
+CloudCostLens is engineered for high-concurrency cloud environments. We use **k6** to validate system stability under stress.
+
+### Load Testing Summary
+| Metric | Result |
+|---|---|
+| **Peak Throughput** | ~1,216 requests/second |
+| **Max Concurrent Users** | 1,000 VUs (Stable) |
+| **Average Latency** | ~791ms (under load) |
+| **Failure Rate** | < 1.4% at peak |
+
+The system demonstrated stable performance for up to 1,000 concurrent users on Render-hosted infrastructure. Detailed stress test reports and bottleneck analysis can be found in [ARCHITECTURE.md](./ARCHITECTURE.md).
+
+---
+
 ## 🛡️ Security Considerations
 
 - **Actuator endpoints** are whitelisted in `SecurityConfig.java` for Prometheus scraping but are not exposed externally.
